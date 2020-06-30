@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Register</title>
+    <link rel="stylesheet" href="Style-for-student-register.css">
+</head>
+<body>
+<div class = form-wrap>
+    <form>
+    <h1 class="header">
+        ĐĂNG KÝ HỌC VIÊN
+    </h1>
+    <table>
+        <tr>
+            <td class = "Liner" >Họ và tên</td>
+            <td> <input class = "textboxform" type="text" style="width: 400px" name="yourname"></td>
+        </tr>
+        <tr>
+            <td class = "Liner" >Ngày sinh</td>
+            <td> <input class = "textboxform" type="text" style="width: 240px" name="birthday"></td>
+        </tr>
+        <tr>
+            <td class = "Liner" >Giới tính</td>
+            <td>
+                <label style="font-size: 20px">Nam <input type="radio" name="gender" value="male"></label>
+                <label style="font-size: 20px">Nữ <input type="radio" name="gender" value="female"></label>
+            </td>
+        </tr>
+        <tr>
+            <td class = "Liner" >Địa chỉ</td>
+            <td> <input class = "textboxform" type="texteara" style="width: 340px; height: 80px" name="address"></td>
+        </tr>
+        <tr>
+            <td class = "Liner" >Lớp</td>
+            <td>
+                <select name = "class">
+                    <option>--Chọn lớp--</option>
+                    <option>Lớp A</option>
+                    <option>Lớp B</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td class = "Liner" >Email</td>
+            <td> <input class = "textboxform" type="text" style="width: 240px" name="email"></td>
+        </tr>
+        <tr>
+            <td class = "Liner" >Điện thoại</td>
+            <td> <input class = "textboxform" type="text" style="width: 240px" name="phone-number"></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <input type="submit" value="Đăng ký" style="font-size: 20px">
+                <input type="reset" value="Nhập lại" style="font-size: 20px">
+            </td>
+        </tr>
+    </table>
+    </form>
+</div>
+</body>
+</html>

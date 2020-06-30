@@ -1,0 +1,50 @@
+.title{
+    font-size: 24px;
+    font-weight: 1000;
+    color: white;
+    background-color: orangered;
+    margin-bottom: 25px;
+    text-align: center;
+}
+.header{
+    color: blue;
+    font-size: 18px;
+    margin-right: 25px;
+}
+.textboxform{
+    width: 300px;
+    height: 30px;
+    margin-bottom: 10px;
+
+}
+.checkform,.checkname{
+    color: indianred;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+.tableform{
+    margin-left: 90px;
+}
+.buttonform{
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 130px
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    background: #fec107;
+    padding: 0 10px;
+}
+.form-wrap{
+    max-width: 500px;
+    width: 100%;
+    background: white;
+    margin: 20px auto;
+    padding: 30px;
+    box-shadow: 1px 1px 2px rgba(0,0,0,0.125);
+}
