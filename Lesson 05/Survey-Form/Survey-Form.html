@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Survey Form</title>
+    <link rel="stylesheet" href="Style-for-survey-form.css">
+</head>
+<body>
+<form>
+<h1>Market Research Survey</h1>
+<p>Please take a few moments to complete this satisfaction survey.</p>
+<label class = "label"><b>What is your age range?</b></label>
+<br>
+<select name="age" style="width: 500px">
+    <option>18-24</option>
+    <option>25-34</option>
+    <option>35-50</option>
+    <option>50+</option>
+</select>
+<br>
+<label class = "label"><b>What is your yearly income range?</b></label>
+<br>
+<select name="income" style="width: 500px">
+    <option>$0-$25,000</option>
+    <option>$25,001-$50,000</option>
+    <option>$50,001-$100,000</option>
+    <option>$100,000+</option>
+</select>
+<br>
+<label class = "label"><b>Gender Identity</b></label>
+<br>
+<label><input name="gender" type="radio" value="Male">Male</label> <br>
+<label><input name="gender" type="radio" value="Female">Female</label> <br>
+
+<label class = "label"><b>Which of the following products have your purchased in the last 2 months. Please check all that apply.</b></label>
+<br>
+<label><input name="products" type="checkbox" value="Product 1">Product 1</label> <br>
+<label><input name="products" type="checkbox" value="Product 2">Product 2</label> <br>
+<label><input name="products" type="checkbox" value="Product 3">Product 3</label> <br>
+
+<label class = "label"><b>How often would you use our new product?</b></label>
+<br>
+<label><input name="frequent" type="radio" value="Daily">Daily</label> <br>
+<label><input name="frequent" type="radio" value="Weekly">Weekly</label> <br>
+<label><input name="frequent" type="radio" value="Monthly">Monthly</label> <br>
+
+<label class = "label"><b>What would you pay for the new product?</b></label><br>
+                <input id="dollar" name="dollar" type="text" value size="10">
+                <label for="dollar">Dollars</label>
+                <input id="cents" name="cents" type="text" value size="2">
+                <label for="cents">Cents</label>
+<br>
+<label class = "label"><b>What features would you like to see in the new product</b></label><br>
+<textarea cols="100%" rows="10" style="margin: 0px; width: 1505px; height: 100px;"></textarea>
+
+<div>
+    <label class = "label"><b>Please rate your level of agreement with the following statements</b></label>
+    <table  border="1" cellspacing="0">
+        <tr class="size">
+            <th class="size1"></th>
+            <th>Strongly Disagree</th>
+            <th>Disagree</th>
+            <th>Agree</th>
+            <th>Strongly Agree</th>
+        </tr>
+        <tr class="size">
+            <th class="size1">Our Product are priced fairly</th>
+            <td class="size" align="center">
+                <input type="radio" id="1">
+                <label for id="1">1</label>
+            </td>
+            <td class="size" align="center">
+                <input type="radio" id="2">
+                <label for id="2">2</label>
+            </td>
+            <td class="size" align="center">
+                <input type="radio" id="3">
+                <label for id="3">3</label>
+            </td>
+            <td class="size" align="center">
+                <input type="radio" id="4">
+                <label for id="4">4</label>
+            </td>
+        </tr>
+        <tr class="size">
+            <th class="size1">Our Product are high quality</th>
+            <td class="size" align="center">
+                <input type="radio" id="1">
+                <label for id="1">1</label>
+            </td>
+            <td class="size" align="center">
+                <input type="radio" id="2">
+                <label for id="2">2</label>
+            </td>
+            <td class="size" align="center">
+                <input type="radio" id="3">
+                <label for id="3">3</label>
+            </td>
+            <td class="size" align="center">
+                <input type="radio" id="4">
+                <label for id="4">4</label>
+            </td>
+        </tr>
+        <tr>
+            <th class="size1">You would recommend our product to a friend or co-worker</th>
+            <td class="size" align="center">
+                <input type="radio" id="1">
+                <label for id="1">1</label>
+            </td>
+            <td class="size" align="center">
+                <input type="radio" id="2">
+                <label for id="2">2</label>
+            </td>
+            <td class="size" align="center">
+                <input type="radio" id="3">
+                <label for id="3">3</label>
+            </td>
+            <td class="size" align="center">
+                <input type="radio" id="4">
+                <label for id="4">4</label>
+            </td>
+        </tr>
+    </table>
+</div>
+<div class="input_field">
+    <input type="submit" value="Summit" class="btn">
+</div>
+</form>
+</body>
+</html>
