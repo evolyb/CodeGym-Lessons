@@ -1,0 +1,27 @@
+
+.TKB{
+    max-width: 1000px;
+    margin: 20px auto;
+    text-align: center;
+}
+*{
+    font-family: Arial;
+}
+.header{
+    color: blue;
+}
+.content{
+    color: blue;
+    padding: 20px;
+    font-size: 20px;
+    width: 1000px;
+}
+.detail{
+    width: 1000px;
+    border-spacing: 0;
+    line-height: 40px;
+ }
+.detail td{
+    border: 1px solid gray;
+
+}

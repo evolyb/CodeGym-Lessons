@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Money Exchange</title>\
+    <link rel="stylesheet" href="style-for-money-exchange.css">
+</head>
+<body>
+<div class = form-wrap>
+    <h1>Money Exchange</h1>
+    <table style="width: 1000px" >
+        <tr>
+            <td><b>Amount</b></td>
+            <td><b>From Currency</b></td>
+            <td><b>To Currency</b></td>
+        </tr>
+        <tr style="line-height: 40px;font-size: 25px">
+        <td><input type="text" id="amount-initial" style="font-size: 20px"></td>
+        <td>
+            <select id="from-currency" style="font-size: 20px">
+                <option>VND</option>
+                <option>USD</option>
+            </select>
+        </td>
+        <td>
+            <select id="to-currency" style="font-size: 20px">
+                <option>USD</option>
+                <option>VND</option>
+            </select>
+        </td>
+        <td>
+            <button type="button" style="font-size: 20px" onclick="ShowConvert()">Convert</button>
+        </td>
+        </tr>
+        <tr>
+            <td><b>Result</b></td>
+        </tr>
+        <tr>
+            <td id="result"></td>
+        </tr>
+    </table>
+</div>
+    <script>
+        function ShowConvert() {
+            var amount;
+            var Currencyfrom;
+            var Currencyto
+            var result;
+            var rate;
+            amount = document.getElementById("amount-initial").value;
+            Currencyfrom = document.getElementById("from-currency").value;
+            Currencyto = document.getElementById("to-currency").value;
+            if (Currencyfrom == "USD") {
+                if (Currencyto == "VND") {
+                    rate = 23000;
+                }
+                else {
+                    rate = 1
+                }
+            }
+            else {
+                if (Currencyto == "USD"){
+                    rate = 1/23000;
+                }
+                else {
+                    rate = 1;
+                }
+            }
+            result = amount * rate;
+            document.getElementById("result").innerHTML = result;
+        }
+    </script>
+</body>
+</html>
