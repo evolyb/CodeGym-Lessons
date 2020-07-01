@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Body Mass Index</title>
+</head>
+<body>
+    <h1>Nhập các chỉ số để tính BMI</h1>
+    <script>
+        let weight = parseFloat(prompt("Input weight"));
+        let height = parseFloat(prompt("Input height"));
+        let BMI = weight / (height * height);
+        let interpretation;
+
+        if (BMI < 18.5){
+            interpretation = "Underweight";
+        } else if (BMI <25){
+            interpretation = "Normal";
+        }else if (BMI <30){
+            interpretation = "Overweight";
+        }else {
+            interpretation = "Obese";
+        }
+        document.write("Weight =",weight,"kg and height =",height,"m");
+        document.write("<br>");
+        document.write("BMI =",BMI," and Interpretation is ",interpretation);
+    </script>
+</body>
+</html>

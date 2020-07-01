@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Days On Month</title>
+</head>
+<body>
+    <h1>DAYS ON MONTH</h1>
+    <input type="text" style="width: 300px;height: 25px;font-size: 20px" id="month">
+    <button style="width: 100px;height: 25px" onclick="Cal()">Tính số ngày</button>
+    <h1>MONTH</h1>
+    <input type="text" style="width: 300px;height: 25px;font-size: 20px;border: none" id="result">
+    <script>
+        function Cal() {
+            let result;
+            let month = parseInt(document.getElementById("month").value);
+            switch (month) {
+                case 2:
+                    result = "28 hoặc 29 ngày";
+                    break;
+                case 4:
+                case 6:
+                case 9:
+                case 11:
+                    result = "30 ngày";
+                    break;
+                default:
+                    result = "31 ngày";
+            }
+            document.getElementById("result").value = "Tháng "+month+" có "+result;
+        }
+    </script>
+</body>
+</html>
