@@ -1,0 +1,24 @@
+.form-wrap{
+    width: 400px;
+    height: 450px;
+    border: 5px solid black;
+    margin: 10px auto;
+}
+.monitor{
+    width: 360px;
+    height: 80px;
+    border: 2px solid black;
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-bottom: 25px;
+    text-align: right;
+    font-size: 40px;
+}
+.buttonform{
+    font-size: 25px;
+    width: 70px;
+    height: 55px;
+    margin-left: 20px;
+    margin-bottom: 20px;
+    font-weight: bold;
+}

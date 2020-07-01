@@ -1,0 +1,15 @@
+.form-wrap1{
+    max-width: 600px;
+    margin: 10px auto;
+    background-color: red;
+}
+.form-wrap{
+    max-width: 600px;
+    margin: 10px auto;
+    background-color: white;
+}
+.imageload{
+    width: 600px;
+    height: 150px;
+    margin-bottom: 5px;
+}
