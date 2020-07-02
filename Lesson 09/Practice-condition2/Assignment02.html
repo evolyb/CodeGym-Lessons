@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Distance Convert</title>
+</head>
+<body>
+<label><input id="input" style="margin-right: 20px;height: 25px;margin-bottom: 20px" type="text">Meter</label><br>
+<label><input id="output" style="margin-right: 20px;height: 25px;margin-bottom: 20px" type="text">Feet</label><br>
+<input id="output" style="margin-right: 20px;height: 25px;margin-bottom: 20px" type="button" value="Convert" onclick="Convert()">
+    <script>
+        function Convert() {
+            var meter = parseFloat(document.getElementById("input").value);
+            var feet = meter * 3.2808;
+            document.getElementById("output").value= feet;
+        }
+    </script>
+</body>
+</html>

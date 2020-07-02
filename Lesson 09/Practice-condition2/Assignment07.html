@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Giải phương trình bậc 2</title>
+</head>
+<body>
+<h1>Giải phương trình bậc 2</h1>
+<label><input id="input1" style="margin-right: 20px;height: 25px;margin-bottom: 20px" type="text">a</label><br>
+<label><input id="input2" style="margin-right: 20px;height: 25px;margin-bottom: 20px" type="text">b</label><br>
+<label><input id="input3" style="margin-right: 20px;height: 25px;margin-bottom: 20px" type="text">c</label><br>
+<label><input id="display" style="margin-right: 20px;height: 25px;margin-bottom: 20px" type="text">Phương trình đầy đủ</label><br>
+<label><input id="output" style="margin-right: 20px;width: 600px; height: 25px;margin-bottom: 20px" type="text">Result</label><br>
+<input style="margin-right: 20px;height: 25px;margin-bottom: 20px" type="button" value="Convert" onclick="Solve()">
+    <script>
+        function Solve() {
+            var a = parseFloat(document.getElementById("input1").value);
+            var b = parseFloat(document.getElementById("input2").value);
+            var c = parseFloat(document.getElementById("input3").value);
+            var result;
+            var Songhiem = 0;
+            var nghiem1;
+            var nghiem2;
+            var pt = a+"x^2 +("+b+")x+("+c+")=0";
+            document.getElementById("display").value= pt;
+            if (a==0){
+                if (b==0){
+                    if (c==0){
+                        result = "Phương trình có vô số nghiệm";
+                    } else {
+                        result = "Phương trình vô nghiệm";
+                    }
+                } else {
+                    result = "Phương trình có 1 nghiệm";
+                    nghiem1 = -(c/b);
+                    Songhiem = 1;
+                }
+            } else {
+                var Delta = (b*b-4*a*c);
+                if (Delta < 0) {
+                    result = "Phương trình vô nghiệm";
+                } else if (Delta == 0) {
+                    result = "Phương trình có nghiệm kép";
+                    nghiem1 = -(b/(2*a));
+                    Songhiem =1;
+                } else {
+                    result = "Phương trình có 2 nghiệm";
+                    nghiem1 = -(b+Math.sqrt(Delta))/(2*a);
+                    nghiem2 = (-b+Math.sqrt(Delta))/(2*a);
+                    Songhiem =2;
+                }
+            }
+            var Hienthi = result;
+            if (Songhiem == 1){
+                Hienthi = Hienthi + " Trong đó nghiệm 1 là: " +nghiem1;
+            } else if (Songhiem ==2){
+                Hienthi = Hienthi + " Trong đó nghiệm 1 là: " +nghiem1;
+                Hienthi = Hienthi + " Trong đó nghiệm 2 là: " +nghiem2;
+            }
+
+            document.getElementById("output").value = Hienthi;
+        }
+    </script>
+</body>
+</html>

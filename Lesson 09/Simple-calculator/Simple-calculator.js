@@ -8,7 +8,6 @@ function addnum(num) {
     return numbernow;
 }
 function delnum() {
-    var numbernow = document.getElementById("monitor-now").value
     numbernow = "0";
     document.getElementById("monitor-now").value = numbernow;
     return "0";

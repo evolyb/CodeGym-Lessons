@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cước điện thoại</title>
+</head>
+<body>
+    <label><input id="domestic_min" type="text" style="height: 25px;margin-bottom: 10px"> Domestic minutes</label><br>
+    <label><input id="international_min" type="text" style="height: 25px;margin-bottom: 10px"> International minutes</label><br>
+    <label><input id="sms_count" type="text" style="height: 25px;margin-bottom: 10px"> Sent sms</label><br>
+    <button style="height: 25px;margin-bottom: 10px" onclick="Tinh_toan()">Tính cước</button><br>
+    <input id="result" style="height: 25px;width: 400px;border: none" type="text" >
+    <script>
+        function Tinh_toan() {
+
+            const domestic_price = 700;
+            const international_price = 3000;
+            const sms_price = 200;
+
+            var domestic_minute = parseFloat(document.getElementById("domestic_min").value);
+            var international_minute = parseFloat(document.getElementById("international_min").value);
+            var sms_count = parseFloat(document.getElementById("sms_count").value);
+
+            var amount = domestic_minute * domestic_price + international_minute * international_price + sms_count * sms_price
+
+            document.getElementById("result").value = "Số tiền cần thanh toán là " + amount
+        }
+    </script>
+</body>
+</html>

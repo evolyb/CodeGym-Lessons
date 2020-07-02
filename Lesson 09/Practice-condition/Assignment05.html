@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kiểm tra học lực</title>
+</head>
+<body>
+    <script>
+        const rateKT = 0.2;
+        const rateGK = 0.3;
+        const rateCK = 0.5;
+        var num1 = parseFloat(prompt("Input điểm kiểm tra lần 1"));
+        var num2 = parseFloat(prompt("Input điểm kiểm tra lần 2"));
+        var num3 = parseFloat(prompt("Input điểm thi giữa kỳ"));
+        var num4 = parseFloat(prompt("Input điểm thi cuối kỳ"));
+
+        var point = mark_average(num1,num2)*rateKT + num3*rateGK + num4*rateCK;
+        var result;
+        if (point < 5){
+            result = "Under_normal"
+        } else if (point <6.5){
+            result = "Normal";
+        } else if (point<8){
+            result = "Good";
+        } else {
+            result = "Very good";
+        }
+        document.write("Điểm kiểm tra lần 1 là ",num1,"<br>");
+        document.write("Điểm kiểm tra lần 2 là ",num2,"<br>");
+        document.write("Điểm kiểm tra giữa kỳ là ",num3,"<br>");
+        document.write("Điểm kiểm tra cuối kỳ là ",num4,"<br>");
+        document.write("Điểm trung binh là ",point,"<br>");
+        document.write("Đánh giá là ",result);
+
+        function mark_average(num1,num2) {
+            var average = (num1 + num2)/2
+            return average;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Degree Convert</title>
+</head>
+<body>
+<label><input id="input" style="margin-right: 20px;height: 25px;margin-bottom: 20px" type="text">Nhiệt độ C</label><br>
+<label><input id="output" style="margin-right: 20px;height: 25px;margin-bottom: 20px" type="text">Nhiệt độ F</label><br>
+<input id="output" style="margin-right: 20px;height: 25px;margin-bottom: 20px" type="button" value="Convert" onclick="Convert()">
+    <script>
+        function Convert() {
+            var Do_C = parseFloat(document.getElementById("input").value);
+            var Do_F = Do_C*9/5+32;
+            document.getElementById("output").value=Do_F;
+        }
+
+    </script>
+</body>
+</html>

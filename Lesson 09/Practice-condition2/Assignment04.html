@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rectangle Area</title>
+</head>
+<body>
+<h1>Rectangle Area</h1>
+<label><input id="input1" style="margin-right: 20px;height: 25px;margin-bottom: 20px" type="text">First edge length</label><br>
+<label><input id="input2" style="margin-right: 20px;height: 25px;margin-bottom: 20px" type="text">Second edge length</label><br>
+<label><input id="output" style="margin-right: 20px;height: 25px;margin-bottom: 20px" type="text">Area</label><br>
+<input id="output" style="margin-right: 20px;height: 25px;margin-bottom: 20px" type="button" value="Convert" onclick="Convert()">
+    <script>
+        function Convert() {
+            var edge1 = parseFloat(document.getElementById("input1").value);
+            var edge2 = parseFloat(document.getElementById("input2").value);
+            var square = edge1 * edge2
+            document.getElementById("output").value= square;
+        }
+    </script>
+</body>
+</html>

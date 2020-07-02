@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Giải phương trình bậc 1</title>
+</head>
+<body>
+<h1>Giải phương trình bậc 1</h1>
+<label><input id="input1" style="margin-right: 20px;height: 25px;margin-bottom: 20px" type="text">a</label><br>
+<label><input id="input2" style="margin-right: 20px;height: 25px;margin-bottom: 20px" type="text">b</label><br>
+<label><input id="display" style="margin-right: 20px;height: 25px;margin-bottom: 20px" type="text">Phương trình đầy đủ</label><br>
+<label><input id="output" style="margin-right: 20px;width: 400px; height: 25px;margin-bottom: 20px" type="text">Nghiệm</label><br>
+<input style="margin-right: 20px;height: 25px;margin-bottom: 20px" type="button" value="Convert" onclick="Convert()">
+    <script>
+        function Convert() {
+            var a = parseFloat(document.getElementById("input1").value);
+            var b = parseFloat(document.getElementById("input2").value);
+            var pt;
+            var result;
+            if (b > 0) {
+                pt = a+"x + "+b+" = 0";
+            } else if (b<0) {
+                pt = a+"x "+b+" = 0";
+            } else {
+                pt = a+"x = 0"
+            }
+            document.getElementById("display").value= pt;
+            if (a == 0) {
+                if (b != 0) {
+                    result = "Phương trình vô nghiệm"
+                } else {
+                    result = "Phương trình có vô số nghiệm"
+                }
+            } else {
+                var nghiem = - (b/a);
+                result = "Phương trình có 1 nghiệm là " + nghiem;
+            }
+            document.getElementById("output").value = result
+        }
+    </script>
+</body>
+</html>
