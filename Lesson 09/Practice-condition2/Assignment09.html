@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kiểm tra 3 cạnh tam giác</title>
+</head>
+<body>
+<h1>Kiểm tra 3 cạnh tam giác</h1>
+<label><input id="input1" style="margin-right: 20px;height: 25px;margin-bottom: 20px" type="text">a</label><br>
+<label><input id="input2" style="margin-right: 20px;height: 25px;margin-bottom: 20px" type="text">b</label><br>
+<label><input id="input3" style="margin-right: 20px;height: 25px;margin-bottom: 20px" type="text">c</label><br>
+<label><input id="output" style="margin-right: 20px;width: 400px; height: 25px;margin-bottom: 20px" type="text">Result</label><br>
+<input style="margin-right: 20px;height: 25px;margin-bottom: 20px" type="button" value="Result" onclick="Solve()">
+    <script>
+        function Solve() {
+            var a = parseFloat(document.getElementById("input1").value);
+            var b = parseFloat(document.getElementById("input2").value);
+            var c = parseFloat(document.getElementById("input3").value);
+
+            var result = "Đây KHÔNG phải 3 cạnh của 1 tam giác";
+            if (a>0 && b>0 && c>0){
+                if (a+b>c && b+c>a && a+c>b){
+                    result = "Đây là 3 cạnh của 1 tam giác";
+                }
+            }
+            document.getElementById("output").value = result;
+        }
+    </script>
+</body>
+</html>

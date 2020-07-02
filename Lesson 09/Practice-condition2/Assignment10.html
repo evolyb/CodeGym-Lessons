@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tính giá điện</title>
+</head>
+<body>
+<h1>Tính giá điện</h1>
+<label>
+    <select id="loai_dien" style="width: 220px;height: 30px;font-size: 20px;margin-bottom: 20px">
+        <option value="dienKD">Giá điện kinh doanh</option>
+        <option value="dienSH">Giá điện sinh hoạt</option>
+    </select>
+</label><br>
+<label><input id="input1" style="margin-right: 20px;height: 25px;margin-bottom: 20px" type="text">Số điện</label><br>
+<label><input id="output" style="margin-right: 20px;width: 400px; height: 25px;margin-bottom: 20px" type="text">Result</label><br>
+<input style="margin-right: 20px;height: 25px;margin-bottom: 20px" type="button" value="Result" onclick="Solve()">
+    <script>
+        function Solve() {
+            const gia_dienSH_muc1 = 1510;
+            const gia_dienKD_muc1 = 900;
+            const muc_tieu_thu1 = 50;
+            const gia_dienSH_muc2 = 1561;
+            const gia_dienKD_muc2 = 935;
+            const muc_tieu_thu2 = 100;
+            const gia_dienSH_muc3 = 1813;
+            const gia_dienKD_muc3 = 1050;
+            const muc_tieu_thu3 = 200;
+            const gia_dienSH_muc4 = 2282;
+            const gia_dienKD_muc4 = 1350;
+            const muc_tieu_thu4 = 300;
+            const gia_dienSH_muc5 = 2834;
+            const gia_dienKD_muc5 = 1850;
+            const muc_tieu_thu5 = 400;
+            const gia_dienSH_muc6 = 2927;
+            const gia_dienKD_muc6 = 1950;
+
+            var mucSH1 = muc_tieu_thu1 * gia_dienSH_muc1;
+            var mucSH2 = (muc_tieu_thu2 - muc_tieu_thu1) * gia_dienSH_muc2 + mucSH1;
+            var mucSH3 = (muc_tieu_thu3 - muc_tieu_thu2) * gia_dienSH_muc3 + mucSH2;
+            var mucSH4 = (muc_tieu_thu4 - muc_tieu_thu3) * gia_dienSH_muc4 + mucSH3;
+            var mucSH5 = (muc_tieu_thu5 - muc_tieu_thu4) * gia_dienSH_muc5 + mucSH4;
+
+            var mucKD1 = muc_tieu_thu1 * gia_dienKD_muc1;
+            var mucKD2 = (muc_tieu_thu2 - muc_tieu_thu1) * gia_dienKD_muc2 + mucKD1;
+            var mucKD3 = (muc_tieu_thu3 - muc_tieu_thu2) * gia_dienKD_muc3 + mucKD2;
+            var mucKD4 = (muc_tieu_thu4 - muc_tieu_thu3) * gia_dienKD_muc4 + mucKD3;
+            var mucKD5 = (muc_tieu_thu5 - muc_tieu_thu4) * gia_dienKD_muc5 + mucKD4;
+
+            var sodien = parseFloat(document.getElementById("input1").value);
+            var loai_dien = document.getElementById("loai_dien").value;
+            var muc_gia;
+            var thanhtien;
+
+            if (loai_dien = "dienKD") {
+                if (sodien <= muc_tieu_thu1){
+                    thanhtien = sodien * gia_dienKD_muc1;
+                } else if (sodien <= muc_tieu_thu2){
+                    thanhtien = (sodien -muc_tieu_thu1) * gia_dienKD_muc2 + mucKD1
+                } else if (sodien <= muc_tieu_thu3){
+                    thanhtien = (sodien -muc_tieu_thu2) * gia_dienKD_muc3 + mucKD2
+                } else if (sodien <= muc_tieu_thu4){
+                    thanhtien = (sodien -muc_tieu_thu3) * gia_dienKD_muc4 + mucKD3
+                } else if (sodien <= muc_tieu_thu5) {
+                    thanhtien = (sodien - muc_tieu_thu4) * gia_dienKD_muc5 + mucKD4
+                } else {
+                    thanhtien = (sodien - muc_tieu_thu5) * gia_dienKD_muc6 + mucKD5
+                }
+            } else {
+                if (sodien <= muc_tieu_thu1){
+                    thanhtien = sodien * gia_dienSH_muc1;
+                } else if (sodien <= muc_tieu_thu2){
+                    thanhtien = (sodien -muc_tieu_thu1) * gia_dienSH_muc2 + mucSH1
+                } else if (sodien <= muc_tieu_thu3){
+                    thanhtien = (sodien -muc_tieu_thu2) * gia_dienSH_muc3 + mucSH2
+                } else if (sodien <= muc_tieu_thu4){
+                    thanhtien = (sodien -muc_tieu_thu3) * gia_dienSH_muc4 + mucSH3
+                } else if (sodien <= muc_tieu_thu5) {
+                    thanhtien = (sodien - muc_tieu_thu4) * gia_dienSH_muc5 + mucSH4
+                } else {
+                    thanhtien = (sodien - muc_tieu_thu5) * gia_dienSH_muc6 + mucSH5
+                }
+            }
+            document.getElementById("output").value = "Số tiền điện cần trả là "+thanhtien+" đồng"
+        }
+    </script>
+</body>
+</html>

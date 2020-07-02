@@ -2,17 +2,23 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Square Area</title>
+    <title>Age Check</title>
 </head>
 <body>
-<label><input id="input" style="margin-right: 20px;height: 25px;margin-bottom: 20px" type="text">Square Length</label><br>
-<label><input id="output" style="margin-right: 20px;height: 25px;margin-bottom: 20px" type="text">Area</label><br>
+<h1>Age Check</h1>
+<label><input id="input" style="margin-right: 20px;height: 25px;margin-bottom: 20px" type="text">Age</label><br>
+<label><input id="output" style="margin-right: 20px;width: 300px; height: 25px;margin-bottom: 20px" type="text">Result</label><br>
 <input id="output" style="margin-right: 20px;height: 25px;margin-bottom: 20px" type="button" value="Convert" onclick="Convert()">
     <script>
         function Convert() {
-            var length = parseFloat(document.getElementById("input").value);
-            var square = length * length;
-            document.getElementById("output").value= square;
+            var age = parseFloat(document.getElementById("input").value);
+            var result;
+            if (age <= 0 || age >= 120){
+                result = "This number is NOT an age of a person"
+            } else {
+                result = "This number is an age of a person"
+            }
+            document.getElementById("output").value= result;
         }
     </script>
 </body>
