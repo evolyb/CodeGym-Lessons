@@ -7,7 +7,7 @@
 <body>
 <h1>Tính giá điện</h1>
 <label>
-    <select id="loai_dien" style="width: 220px;height: 30px;font-size: 20px;margin-bottom: 20px">
+    <select name="type1" id="type2" style="width: 220px;height: 30px;font-size: 20px;margin-bottom: 20px">
         <option value="dienKD">Giá điện kinh doanh</option>
         <option value="dienSH">Giá điện sinh hoạt</option>
     </select>
@@ -48,11 +48,11 @@
             var mucKD5 = (muc_tieu_thu5 - muc_tieu_thu4) * gia_dienKD_muc5 + mucKD4;
 
             var sodien = parseFloat(document.getElementById("input1").value);
-            var loai_dien = document.getElementById("loai_dien").value;
+            var loai_dien = document.getElementById("type2").value;
             var muc_gia;
             var thanhtien;
 
-            if (loai_dien = "dienKD") {
+            if (loai_dien == "dienKD") {
                 if (sodien <= muc_tieu_thu1){
                     thanhtien = sodien * gia_dienKD_muc1;
                 } else if (sodien <= muc_tieu_thu2){

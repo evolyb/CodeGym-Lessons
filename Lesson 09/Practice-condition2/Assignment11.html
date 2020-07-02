@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Income Tax</title>
+</head>
+<body>
+<h1>Income Tax</h1>
+<label>
+    <select name="type1" id="type2" style="width: 320px;height: 30px;font-size: 20px;margin-bottom: 20px">
+        <option value="TP">Luỹ tiến từng phần</option>
+        <option value="10">Toàn phần 10%</option>
+        <option value="20">Cá nhân không cứ chú 20%</option>
+    </select>
+</label><br>
+<label><input id="input1" style="margin-right: 20px;height: 25px;margin-bottom: 20px" type="text">Thu nhập chịu thuế</label><br>
+<label><input id="input2" style="margin-right: 20px;height: 25px;margin-bottom: 20px" type="text">Số người phụ thuộc</label><br>
+
+<input style="margin-right: 20px;height: 25px;margin-bottom: 20px" type="button" value="Result" onclick="Result()"><br>
+<label><input id="output" style="margin-right: 20px;width: 300px; height: 25px;margin-bottom: 20px" type="text">Thuế TNCN</label><br>
+
+    <script>
+        function Result() {
+            var TNCT = parseFloat(document.getElementById("input1").value);
+            var SoNPT = parseFloat(0+document.getElementById("input2").value);
+            var PP_tinh_thue = document.getElementById("type2").value;
+            var TNTT;
+            var TNCN;
+
+            if (PP_tinh_thue == "10"){
+                if (TNCT >= 0) {
+                    TNTT = TNCT;
+                    TNCN = TNTT * 0.1;
+                } else {
+                    TNCN = "Thu nhập không thể âm";
+                }
+            } else if (PP_tinh_thue == "20"){
+                if (TNCT >= 0) {
+                    TNTT = TNCT;
+                    TNCN = TNTT * 0.2;
+                } else {
+                    TNCN = "Thu nhập không thể âm";
+                }
+            } else {
+                TNTT = TNCT - 11000000 - SoNPT*4400000;
+                if (TNTT < 0) {
+                    TNCN = 0;
+                } else if (TNTT <= 5000000) {
+                    TNCN = TNTT * 0.05;
+                } else if (TNTT <= 10000000) {
+                    TNCN = TNTT * 0.1 - 250000;
+                } else if (TNTT <= 18000000) {
+                    TNCN = TNTT * 0.15 - 750000;
+                } else if (TNTT <= 32000000) {
+                    TNCN = TNTT * 0.2 - 1650000;
+                } else if (TNTT <= 52000000) {
+                    TNCN = TNTT * 0.25 - 3250000;
+                } else if (TNTT <= 80000000) {
+                    TNCN = TNTT * 0.3 - 5850000;
+                } else {
+                    TNCN = TNTT * 0.35 - 9850000;
+                }
+            }
+            document.getElementById("output").value = TNCN
+        }
+    </script>
+</body>
+</html>
