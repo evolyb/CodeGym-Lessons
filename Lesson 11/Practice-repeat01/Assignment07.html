@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hiển thị 100 số</title>
+</head>
+<body>
+    <script>
+        let Result = "1";
+        let Chuoi;
+        for (let i=2;i<=100;i++){
+            Chuoi = ""
+            num = i;
+            if (i % 3 == 0){
+                Chuoi = "Fizz";
+                num = "";
+            }
+            if (i % 5 == 0){
+                Chuoi = Chuoi + "Buzz";
+                num = "";
+            }
+            Result = Result + ", " + num + Chuoi;
+        }
+        document.write("Dãy 100 số là = ",Result);
+
+    </script>
+</body>
+</html>

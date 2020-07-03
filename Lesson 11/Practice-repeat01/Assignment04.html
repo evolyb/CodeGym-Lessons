@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>The first Fibonacci mod 5 = 0</title>
+</head>
+<body>
+    <script>
+        let firstNum = 1;
+        let secondNum = 1;
+        let k = 0;
+        let isResult = false;
+        let Result = 0;
+        while (!isResult){
+            k = secondNum;
+            secondNum = secondNum + firstNum;
+            firstNum = k;
+            if (secondNum % 5 == 0){
+                isResult = true;
+                Result = secondNum;
+            }
+        }
+        document.write("The first fibonacci which mod 5 = 0 is "+Result);
+    </script>
+</body>
+</html>
