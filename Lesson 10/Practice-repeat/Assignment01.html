@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Assignment 01</title>
+</head>
+<body>
+<script language="javascript">
+    let draw;
+    let i =1;
+    let j =1;
+    draw = "<table border='1' width='500' cellspacing='0' cellpadding='3' align='center' style='text-align: center'>";
+    while (i <= 10) {
+        draw = draw + "<tr>";
+        while (j <= 10) {
+            draw = draw + "<td>" + i * j + "</td>";
+            j++;
+        }
+        draw = draw + "</tr>";
+        j = 1;
+        i++;
+    }
+    draw = draw + "</table>";
+    document.write(draw);
+</script>
+</body>
+</html>

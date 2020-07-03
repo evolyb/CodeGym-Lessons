@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Multiplication table</title>
+</head>
+<body>
+    <script>
+        let draw;
+        let i =1;
+        let j =1;
+        draw = "<table border='1' width='900' cellspacing='0' cellpadding='3' align='center' style='text-align: center'>";
+        while (i <= 9) {
+            draw = draw + "<tr>";
+            while (j <= 9) {
+                draw = draw + "<td>" + j +" x " +i +" = " +i*j+ "</td>";
+                j++;
+            }
+            draw = draw + "</tr>";
+            j = 1;
+            i++;
+        }
+        draw = draw + "</table>";
+        document.write(draw);
+    </script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Assignment 01</title>
+</head>
+<body>
+<h1>Assignment 01</h1>
+<script>
+    let num ="";
+    let Sum = 0;
+    while (num != '-1'){
+        num = prompt("Input number");
+        if (num == "-1"){
+            alert("Goodbye");
+            break;
+        }
+        alert("Số vừa nhập là "+num);
+        Sum = Sum + parseInt(num);
+        alert("Tổng là "+ Sum);
+    }
+</script>
+</body>
+</html>

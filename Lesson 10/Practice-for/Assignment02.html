@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Assignment 02</title>
+</head>
+<body>
+<h1>Assignment 02</h1>
+<label><input id="input1" style="margin-right: 20px;height: 25px;margin-bottom: 20px" type="text">Input your number</label><br>
+<input style="margin-right: 20px;height: 25px; margin-bottom: 20px" type="button" value="Result" onclick="Resultnow()"><br>
+
+<label><input id="output" style="margin-right: 20px;height: 25px;width: 300px; margin-bottom: 20px" type="text">Result</label><br>
+
+    <script>
+        function Resultnow(){
+            var num1 = parseInt(document.getElementById("input1").value);
+            var Sum = 0;
+            if (num1 <= 0){
+                document.getElementById("output").value = "Yêu cầu nhập số nguyên lớn hơn 0";
+            } else {
+                for (var i=1;i <= num1;i++){
+                    Sum = Sum + i;
+                }
+                document.getElementById("output").value = Sum;
+            }
+        }
+    </script>
+</body>
+</html>
