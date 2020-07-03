@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fibonacci</title>
+</head>
+<body>
+    <script>
+        let firstNum = 1;
+        let secondNum = 1;
+        let k = 0;
+        let Result = "Dãy 20 số fibonacci đầu tiên là 1, 1";
+        for (let i=3;i<=20;i++){
+            k = secondNum;
+            secondNum = secondNum + firstNum;
+            firstNum = k;
+            Result = Result + ", "+secondNum;
+        }
+        document.write(Result);
+
+    </script>
+</body>
+</html>

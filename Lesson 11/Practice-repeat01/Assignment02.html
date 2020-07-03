@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Assignment 02</title>
+</head>
+<body>
+    <script>
+    let tempt;
+        do {
+            tempt = parseFloat(prompt("Input Temperature"));
+            if (tempt < 20){
+                alert("Too Cold, Increase the temperature");
+            } else if (tempt > 100) {
+                alert("Too Hot, Decrease the temperature");
+            } else {
+                alert("Just right");
+            }
+        } while (tempt <20 || tempt >100);
+
+    </script>
+</body>
+</html>

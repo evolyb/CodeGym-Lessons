@@ -27,13 +27,9 @@
             var LaiSuat = parseFloat(document.getElementById("input3").value)/100;
             var PP_tinh = document.getElementById("type2").value;
             var Lai;
-            alert(100000*Math.pow(1.1,100))
             if (PP_tinh == "LaiDon"){
                Lai = SoTien * SoThang * LaiSuat;
             } else {
-                alert(1+LaiSuat);
-                alert(SoTien);
-                alert(SoTien * Math.pow((1+LaiSuat),SoThang))
                 Lai = SoTien * Math.pow((1+LaiSuat),SoThang) - SoTien;
             }
             document.getElementById("output").value = Math.round(Lai);
