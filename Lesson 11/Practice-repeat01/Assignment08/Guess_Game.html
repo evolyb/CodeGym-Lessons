@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Guess Game</title>
+    <link rel="stylesheet" href="Guess-game.css">
+</head>
+<body>
+<div class = "form-wrap">
+    <h1>Guess Game</h1>
+    <p>Press Button below to start</p>
+    <input type="button" value="PLAY" class="PlayButton" onclick="PlayNow()">
+</div>
+<script>
+    function PlayNow() {
+        let min = parseInt(prompt("Nhập giới hạn dưới"));
+        let max = parseInt(prompt("Nhập giới hạn trên"));
+        let randCom = Math.floor(Math.random()*(max-min+1)+min);
+        let userInput;
+
+        for (var i=1;i<=3;i++) {
+            userInput = parseInt(prompt("Nhập số bạn chọn"));
+            if (userInput < randCom) {
+                if (i < 3){
+                    alert("Bạn cần nhập số lớn hơn");
+                } else {
+                    alert("Chúc bạn may mắn lần sau. Số cần tìm là "+randCom);
+                }
+            } else if (userInput > randCom) {
+                if (i < 3){
+                    alert("Bạn cần nhập số nhỏ hơn");
+                } else {
+                    alert("Chúc bạn may mắn lần sau. Số cần tìm là "+randCom);
+                }
+            } else {
+                alert("Chúc mừng bạn đã chiến thắng");
+                break;
+            }
+        }
+
+    }
+</script>
+</body>
+</html>

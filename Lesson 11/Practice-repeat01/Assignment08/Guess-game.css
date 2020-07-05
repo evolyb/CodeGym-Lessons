@@ -1,0 +1,15 @@
+.form-wrap{
+    width: 400px;
+    height: 500px;
+    border: 1px solid black;
+    margin: auto;
+    text-align: center;
+
+}
+.PlayButton{
+    font-size: 30px;
+    margin-top: 100px;
+}
+.PlayButton:hover{
+    background-color: red;
+}
