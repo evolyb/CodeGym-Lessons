@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Assignment05</title>
+</head>
+<body>
+<script>
+    let N = parseInt(prompt("Nhập số phần tử"));
+    let arr = Array();
+    let dem = 0;
+    for (let i = 0; i < N; i++) {
+        arr[i] = Math.floor(Math.random()*31)-15;
+        if (arr[i] < 0){
+            dem++
+        }
+    }
+    let str = arr.join();
+
+    document.write("Dãy ngẫu nhiên khác nhau là: "+str + "<br>" +"Số nguyên âm = "+dem);
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add minus in String</title>
+</head>
+<body>
+    <script>
+        let num = prompt("Nhập chuỗi số");
+        let Chuoi = num.toString();
+        let Result = Chuoi[0];
+
+        for (let i = 1;i<Chuoi.length;i++){
+            if (Chuoi[i-1] % 2 ==0 && Chuoi[i] % 2 ==0){
+                Result = Result + "-" + Chuoi[i];
+            } else {
+                Result = Result + Chuoi[i];
+            }
+        }
+        document.write(Result);
+    </script>
+</body>
+</html>

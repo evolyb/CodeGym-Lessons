@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Assignment02</title>
+</head>
+<body>
+<script>
+    let N = parseInt(prompt("Nhập số phần tử"));
+    let arr = Array();
+    let dem = 0;
+    let str="";
+    for (let i = 0; i < N; i++) {
+        do {
+            arr[i] = Math.floor(Math.random()*101)+1;
+        } while (checkTrung(i))
+        str = str + " " + arr[i];
+    }
+    let max = arr[0];
+    let hesoMax = 0;
+    for (let i = 1; i <arr.length ; i++) {
+        if (arr[i] > max){
+            max = arr[i];
+            hesoMax = i;
+        }
+    }
+    document.write("Dãy ngẫu nhiên khác nhau là: "+str + "<br>" +"max=" + max +". Hệ số= " + hesoMax);
+
+    function checkTrung(num) {
+        for (let i = 0; i < num; i++) {
+            if (arr[i] === arr[num]){
+                return true;
+            }
+        }
+        return false;
+    }
+
+</script>
+</body>
+</html>

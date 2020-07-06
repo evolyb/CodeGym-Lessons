@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Đảo ngược mảng không dùng Reverse</title>
+</head>
+<body>
+<p id ="textInput"></p>
+<p id ="textOutput"></p>
+    <script>
+        let x = [-3, 5, 1,0, 3, 2, 10];
+        let first = 0;
+        let last = x.length - 1;
+
+        document.getElementById("textInput").innerHTML = "Chuỗi ban đầu là: "+x + "<br>";
+        while (first < last) {
+            let b = x[first];
+            x[first] = x[last];
+            x[last] = b;
+            first++;
+            last--;
+        }
+        document.getElementById("textOutput").innerHTML = "Chuỗi đảo chiều là: "+ x + "<br>";
+    </script>
+</body>
+</html>

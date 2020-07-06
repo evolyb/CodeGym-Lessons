@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Assignment08</title>
+</head>
+<body>
+<script>
+    let N = parseInt(prompt("Nhập số phần tử"));
+    let arr = Array();
+    for (let i = 0; i < N; i++) {
+        arr[i] = Math.floor(Math.random()*40)+1;
+    }
+    let str = arr.join();
+
+    let newarr = arr.sort(function (a,b) {
+        return b-a;
+    })
+
+    let newstr = newarr.join();
+
+    document.write("Dãy ngẫu nhiên khác nhau là: "+str + "<br>" +"Dãy\ " +
+                    "mới sau khi sắp xếp là: "+newstr);
+</script>
+</body>
+</html>

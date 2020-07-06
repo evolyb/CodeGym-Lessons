@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Assignment01</title>
+</head>
+<body>
+    <script>
+        let str="";
+        let a = [
+            [1, 2, 1, 24],
+            [8, 11, 9, 4],
+            [7, 0, 7, 27],
+            [7, 4, 28, 14],
+            [3, 10, 26, 7]
+        ];
+        for (let i = 0; i < a.length; i++) {
+            str += "Row "+i+"<br>"
+            for (let j = 0; j < a[i].length; j++) {
+                str += a[i][j]+"<br>";
+            }
+        }
+        document.write(str);
+    </script>
+</body>
+</html>

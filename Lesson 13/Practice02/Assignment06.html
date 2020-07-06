@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Assignment06</title>
+</head>
+<body>
+    <script>
+        let a = prompt("Nhập chuỗi");
+        let str = "";
+        for (let i = 0; i < a.length; i++) {
+            if (a[i] === "-"){
+                str += "_";
+            } else {
+                str += a[i];
+            }
+        }
+        document.write("Chuỗi nhập vào là: "+a+"<br>" +"Chuỗi sau đó là ",str)
+    </script>
+</body>
+</html>

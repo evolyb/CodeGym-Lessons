@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Thay đổi chuỗi</title>
+</head>
+<body>
+    <script>
+        let Chuoi = prompt("Nhập chuỗi cần xử lý");
+        let str = Chuoi.toString();
+        let Result = "";
+
+        for (let i = 0;i<str.length;i++){
+            if (str[i] === str[i].toUpperCase()){
+                Result += str[i].toLowerCase();
+            } else {
+                Result += str[i].toUpperCase();
+            }
+        }
+        document.write(Result);
+    </script>
+</body>
+</html>

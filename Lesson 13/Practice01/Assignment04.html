@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Assignment04</title>
+</head>
+<body>
+<script>
+    let N = parseInt(prompt("Nhập số phần tử"));
+    let arr = Array();
+    for (let i = 0; i < N; i++) {
+        arr[i] = Math.floor(Math.random()*101)+1;
+    }
+    let str = arr.join();
+    let reverseStr = arr.reverse()
+
+    document.write("Dãy ngẫu nhiên khác nhau là: "+str + "<br>" +"Dãy reverse là: "+reverseStr);
+
+
+</script>
+</body>
+</html>

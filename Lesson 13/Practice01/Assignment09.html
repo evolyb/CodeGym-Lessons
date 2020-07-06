@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Assignment09</title>
+</head>
+<body>
+<script>
+    let N = parseInt(prompt("Nhập số phần tử của dãy a"));
+    let a = Array();
+    for (let i = 0; i < N; i++) {
+        a[i] = Math.floor(Math.random()*40)+1;
+    }
+    let N2 = parseInt(prompt("Nhập số phần tử của dãy b"));
+    let b = Array();
+    for (let i = 0; i < N2; i++) {
+        b[i] = Math.floor(Math.random()*40)+1;
+    }
+
+    let str1 = a.join();
+    let str2 = b.join();
+
+    let newstr = a.concat(b);
+    let str3 =newstr.join();
+
+    document.write("Dãy ngẫu nhiên khác nhau a là: "+str1 + "<br>" +"Dãy\ " +
+                    "ngẫu nhiên b là: "+str2 + "<br>" + "Chuỗi mới sau khi nối là: "+str3)
+</script>
+</body>
+</html>

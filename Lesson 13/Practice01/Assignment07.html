@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Assignment07</title>
+</head>
+<body>
+<script>
+    let N = parseInt(prompt("Nhập số phần tử"));
+    let arr = Array();
+    for (let i = 0; i < N; i++) {
+        arr[i] = Math.floor(Math.random()*20)+1;
+    }
+    let str = arr.join();
+    let rand = Math.floor(Math.random()*20)+1;
+    let num = 0;
+    let Result = false;
+    for (let i = 0; i < N; i++) {
+        if (arr[i] === rand){
+            Result = true;
+            num = i;
+        }
+    }
+    if (Result){
+        for (let i = num; i < N-1 ; i++) {
+            arr[i] =  arr[i+1];
+        }
+        arr[N-1]="";
+    }
+
+    let newstr = arr.join();
+
+    document.write("Dãy ngẫu nhiên khác nhau là: "+str + "<br>" +"Số nguyên ngẫu nhiên: "+rand+ " .Dãy\ " +
+                    "mới sau khi xoá là: "+newstr)
+
+
+</script>
+</body>
+</html>

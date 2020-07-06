@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dictionary</title>
+</head>
+<body>
+<h1>ENG - VI DICTIONARY</h1>
+    <label><input id="input" type="text" style="width: 300px; font-size: 20px; margin-bottom: 10px">hi,run,go</label><br>
+    <input type="button" value="Translate" style="font-size: 20px" onclick="Translate()">
+    <p id = "output"></p>
+
+<script>
+    let eng = ['HI','GO','RUN'];
+    let vn = ['Xin chào','Đi','Chạy'];
+    let index;
+
+    function Translate() {
+        let search = document.getElementById("input").value.toUpperCase()
+        let Result;
+        if (eng.indexOf(search) === -1){
+            Result = "Not found"
+        } else {
+            index = eng.indexOf(search);
+            Result = vn[index];
+        }
+        document.getElementById("output").innerHTML = Result;
+    }
+</script>
+</body>
+</html>

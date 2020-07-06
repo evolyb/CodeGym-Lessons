@@ -1,0 +1,32 @@
+.Caro{
+    max-width: 640px;
+    border: none;
+    margin: 20px auto;
+    border-spacing: 0px;
+
+}
+.Caro td{
+    border: 2px solid black ;
+    width: 100px;
+    height: 100px;
+    text-align: center;
+}
+.Caro td input{
+    border: none;
+    width: 90px;
+    font-size: 60px;
+    text-align: center;
+    background-color: none;
+}
+.Caro button{
+    border: none;
+    width: 200px;
+    height: 200px;
+    font-size: 60px;
+    text-align: center;
+    background-color: none;
+}
+.Mark{
+    font-size: 30px;
+
+}

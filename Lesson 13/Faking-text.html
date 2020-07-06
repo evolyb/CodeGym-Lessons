@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Faking Textarea on Typing</title>
+</head>
+<body onload="docReady()">
+    <h1>Type anything slowly</h1>
+    <textarea id="input" rows="4" style="width: 400px;font-size: 25px"></textarea>
+
+<script>
+    let str = "Xin chào! Mình là Computer !!"
+    let Screen = document.getElementById("input");
+
+    function KeyPress() {
+        let str_now = Screen.value;
+        let len = str_now.length;
+        if (len > str.length){
+            len = str.length;
+        }
+        let change_str = "";
+        for (let i = 0; i <len ; i++) {
+            change_str = change_str + str[i];
+        }
+        Screen.value = change_str;
+    }
+    function docReady() {
+        window.addEventListener('keyup',KeyPress);
+    }
+</script>
+</body>
+</html>

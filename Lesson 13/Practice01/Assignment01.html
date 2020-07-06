@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Assignment01</title>
+</head>
+<body>
+    <script>
+        let N = parseInt(prompt("Nhập số phần tử"));
+        let arr = Array();
+        let dem = 0;
+        let str="";
+        for (let i = 0; i < N; i++) {
+            arr[i] = Math.floor(Math.random()*201)-100;
+            str = str + " " + arr[i];
+        }
+        for (let i = 0; i <arr.length ; i++) {
+            if (arr[i] >= 10){
+                dem++;
+            }
+        }
+
+        document.write(str + "<br>" +"Số phần tử lớn hơn 10 là: "+dem);
+    </script>
+</body>
+</html>

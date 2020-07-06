@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Assignment06</title>
+</head>
+<body>
+<script>
+    let N = parseInt(prompt("Nhập số phần tử"));
+    let arr = Array();
+    for (let i = 0; i < N; i++) {
+        arr[i] = Math.floor(Math.random()*41)+1;
+    }
+    let str = arr.join();
+    let rand = Math.floor(Math.random()*41)+1;
+
+    let Result = "";
+    for (let i = 0; i < N; i++) {
+        if (arr[i] === rand){
+            Result = " is in the array";
+            break;
+        }
+        Result = " is NOT in the array";
+    }
+
+
+    document.write("Dãy ngẫu nhiên khác nhau là: "+str + "<br>" +"Số nguyên: "+rand+Result);
+
+
+</script>
+</body>
+</html>
