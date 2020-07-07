@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Assignment07</title>
+</head>
+<body>
+    <script>
+        let num1 = parseFloat(prompt("Nhập vào số nguyên thứ 1"));
+        let num2 = parseFloat(prompt("Nhập vào số nguyên thứ 2"));
+        alert("Trước khi đổi. SỐ thứ 1= "+num1+". Số thứ 2= "+num2);
+        function Swap() {
+            tempt = num1;
+            num1 = num2;
+            num2 = tempt;
+        }
+        Swap();
+        alert("Sau khi đổi. SỐ thứ 1= "+num1+". Số thứ 2= "+num2);
+    </script>
+</body>
+</html>

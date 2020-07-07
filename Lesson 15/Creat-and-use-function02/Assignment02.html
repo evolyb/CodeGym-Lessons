@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Assignment02</title>
+</head>
+<body>
+    <script>
+        let r = parseFloat(prompt("Nhập bán kính hình tròn"));
+        document.write("Hình tròn với bán kính = "+r+" có:<br>");
+        document.write("Diện tích = "+area(r)+". Chu vi = "+perimeter(r));
+
+        function area(r) {
+            return 3.14 * r * r;
+        }
+        function perimeter(r) {
+            return 2* 3.14 * r;
+        }
+    </script>
+</body>
+</html>

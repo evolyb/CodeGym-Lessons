@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Assignment03</title>
+</head>
+<body>
+    <script>
+        let num = parseInt(prompt("Nhập vào một số tự nhiên"));
+        if (num <0){
+            alert("Bạn vừa nhập một số nguyên âm")
+        } else {
+            alert(num+"! = "+giaiThua(num));
+        }
+
+        function giaiThua(num) {
+            let Result = 1;
+            if (num === 0){
+                return 1;
+            }
+            for (let i = 1; i <=num ; i++) {
+                Result = Result * i;
+            }
+            return Result;
+        }
+
+    </script>
+</body>
+</html>

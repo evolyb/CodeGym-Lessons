@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Assignment09</title>
+</head>
+<body>
+    <script>
+        let str = prompt("Nhập vào chuỗi");
+        let kytu = prompt("Nhập vào 1 ký tự");
+        alert(check(kytu,str));
+
+
+        function check(kytu,str) {
+            if (str.search(kytu) === -1) {
+                return "Không tìm thấy ký tự trong chuỗi"
+            }
+            let count=0;
+            for (let i = 0; i <str.length ; i++) {
+                if (str[i] === kytu){
+                    count++;
+                }
+            }
+            let Result = "Ký tự "+kytu+" được tìm thấy "+count+" lần trong chuỗi: "+str;
+            return Result;
+        }
+    </script>
+</body>
+</html>

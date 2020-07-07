@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Foot To Meter</title>
+</head>
+<body>
+<h1>Foot and Meter Converter</h1>
+<br>
+<select id="selectHam" style="width: 50;height: 30px;font-size: 20px">
+    <option value="1">Foot - Meter</option>
+    <option value="2">Meter - Foot</option>
+</select>
+<br><br>
+
+<input id="input" style="width: 50;height: 30px;font-size: 20px" onchange="FootAndMeter(this.value)" oninput="FootAndMeter(this.value)" "><label>Input</label><br><br>
+<input id="output" style="width: 50;height: 30px;font-size: 20px" disabled><label>Output</label>
+    <script>
+        function FootAndMeter(num) {
+            let id = document.getElementById("selectHam").value;
+            let Result;
+            if (id == 1) {
+                Result = 0.305 * num
+            } else {
+                Result = 3.279 * num;
+            }
+            document.getElementById("output").value = Result;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Star</title>
+</head>
+<body onload="check()">
+    <script>
+        let namePerson = ["Polaris", "Aldebaran", "Deneb", "Vega", "Altair", "Dubhe" , "Regulus"];
+        let nameStar = ["Ursa Minor", "Tarurus", "Cygnus", "Lyra", "Aquila", "Ursa Major", "Leo"];
+
+        function check() {
+            let Result;
+            let name = prompt("Input name of person");
+            let indexPerson = namePerson.indexOf(name);
+            if (indexPerson === -1){
+                Result = "NOT FOUND"
+            } else {
+                Result = "Tên ngôi sao tương ứng của "+name+" là: " +nameStar[indexPerson];
+            }
+            alert(Result);
+        }
+    </script>
+</body>
+</html>

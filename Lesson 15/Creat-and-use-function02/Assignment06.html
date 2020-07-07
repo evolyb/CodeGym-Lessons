@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Assignment06</title>
+</head>
+<body>
+    <script>
+        let num1 = parseInt(prompt("Nhập vào số nguyên thứ 1"));
+        if (check(num1)){
+            alert("Số nhập vào là số nguyên dương")
+        } else {
+            alert("Số nhập vào nhỏ hơn bằng 0");
+        }
+
+        function check(a) {
+            if (a>0){
+                return true;
+            }
+            return false;
+        }
+    </script>
+</body>
+</html>
