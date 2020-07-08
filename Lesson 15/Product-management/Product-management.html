@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Product Management</title>
+    <link rel="stylesheet" href="product-management.css">
+    <script src="product-management.js"></script>
+</head>
+<body onload="DisplayProduct()">
+<h1>Product Management</h1>
+<h2>Add New Product</h2>
+<div class="addProductForm">
+    <input id="inputNew" type="text" placeholder="New product">
+    <input id="addButton" class="AddButton" type="button" value="Add" onclick="AddProduct()">
+</div>
+<h2>Display All Product</h2>
+<h3 id = "countProduct">Product Name</h3>
+<p id="DisplayTable"></p>
+<!--<table style='border: 1px solid black'><tr><td class='productDisplay'>Sony</td><td>"+EditButton+"</td></tr></table>"-->
+</body>
+</html>

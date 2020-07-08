@@ -1,0 +1,49 @@
+.addProductForm{
+    width: 400px;
+    height: 100px;
+    background-color: #eeeeee;
+    position: relative;
+}
+#inputNew{
+    width: 250px;
+    height: 30px;
+    margin-top: 30px;
+    margin-left: 20px;
+    position: absolute;
+    font-size: 20px;
+}
+.Button{
+    width: 50px;
+    height: 35px;
+    position: relative;
+    background-color: #0ff30f;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+.AddButton{
+    width: 50px;
+    height: 35px;
+    position: absolute;
+    margin-top: 30px;
+    margin-left: 300px;
+    background-color: #0ff30f;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+.productDisplay{
+    text-align: left;
+    width: 300px;
+    padding-left: 20px;
+    line-height: 50px;
+    font-size: 20px;
+}
+table td{
+    width: 100px;
+    text-align: center;
+}
+table tr:nth-child(even){
+    background-color: #dddddd;
+}
+table{
+    border-spacing: 0px;
+}

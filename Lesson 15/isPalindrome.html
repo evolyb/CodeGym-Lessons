@@ -6,9 +6,18 @@
 </head>
 <body>
     <script>
-        function isPalindrome(str,id){
-            if (str[id] !== str[str.length-id-1]){
+        let str = prompt("Nhập từ cần kiểm tra");
+        alert(isPalindrome(str,0));
+        debugger;
+
+        function isPalindrome(str,id) {
+            if (str[id] !== str[str.length - id - 1]) {
                 return false;
             }
-            if (id <= str.length )
+            if (id <= str.length / 2 - 2) {
+                return isPalindrome(str, id + 1);
+            } else return str[id] === str[str.length - id - 1];
         }
+        </script>
+</body>
+</html>
