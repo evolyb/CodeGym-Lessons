@@ -10,29 +10,16 @@
         let canhHai = parseInt(prompt("Nhập độ dài cạnh 2"));
         document.write("<br>");
 
-        // Cạnh trên
-        for (i = 1;i<=canhMot;i++){
-            document.write("*");
-        }
-        document.write("<br>");
-
-        // 2 Cạnh bên
-        for (i = 1;i <= canhHai-2;i++){
-            document.write("*");
-            for (j=1;j<=canhMot-2;j++){
-                document.write("&#160"+"&#160");
+        for (let i = 1; i <= canhMot; i++) {
+            for (let j = 1; j <= canhHai ; j++) {
+                if (i===1 || i === canhMot || j ===1 || j === canhHai){
+                    document.write("*");
+                } else {
+                    document.write("&#160&#160");
+                }
             }
-            document.write("*");
-            document.write("<br>");
+            document.write("<br>")
         }
-
-        // Cạnh dưới
-        for (i = 1;i<=canhMot;i++){
-            document.write("*");
-        }
-        document.write("<br>");
-
-
 
     </script>
 </body>
