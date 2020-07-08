@@ -1,32 +1,51 @@
-.Caro{
+table{
     max-width: 640px;
     border: none;
     margin: 20px auto;
     border-spacing: 0px;
 
 }
-.Caro td{
+td{
     border: 2px solid black ;
     width: 100px;
     height: 100px;
     text-align: center;
-}
-.Caro td input{
-    border: none;
-    width: 90px;
     font-size: 60px;
-    text-align: center;
-    background-color: none;
 }
-.Caro button{
-    border: none;
-    width: 200px;
-    height: 200px;
-    font-size: 60px;
-    text-align: center;
-    background-color: none;
+td:hover{
+    background-color: #0ff30f;
+}
+td.change:hover{
+    background-color: red;
 }
 .Mark{
     font-size: 30px;
-
+}
+#X00 {
+    border-top: none;
+    border-left: none;
+}
+#X01 {
+    border-top: none;
+}
+#X02 {
+    border-top: none;
+    border-right: none;
+}
+#X10 {
+    border-left: none;
+}
+#X12 {
+    border-right: none;
+}
+#X20 {
+    border-bottom: none;
+    border-left: none;
+}
+#X21 {
+    border-bottom: none;
+}
+#X22 {
+    border-right: none;
+    border-bottom: none;
 }

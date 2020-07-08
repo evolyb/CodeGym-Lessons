@@ -6,27 +6,32 @@
     <link rel="stylesheet" href="Tic-tac-toe.css">
     <script src="Tick-tac-toe.js"></script>
 </head>
-<body>
+<body onload="DisplayTable()">
+<div style="margin: auto;text-align: center">
 <h1 style="margin: auto;text-align: center;font-size: 50px">TIC-TAC-TOE</h1>
+    <select style="margin: 0px auto;align-items: center;font-size: 30px" id="gameType" onchange="selectGameType()">
+        <option value="1">Player - Com</option>
+        <option value="2">Player - Player</option>
+    </select>
         <table id ="Caro" class="Caro">
             <tr>
-                <td id="Y11" onclick="AddRand(1,1)"><input id ="X11" value="" disabled></td>
-                <td id="Y12" onclick="AddRand(1,2)"><input id ="X12" value="" disabled></td>
-                <td id="Y13" onclick="AddRand(1,3)"><input id ="X13" value="" disabled></td>
+                <td id="X00" onclick="inputMark(0,0)"></td>
+                <td id="X01" onclick="inputMark(0,1)"></td>
+                <td id="X02" onclick="inputMark(0,2)"></td>
             </tr>
             <tr>
-                <td id="Y21" onclick="AddRand(2,1)"><input id ="X21" value="" disabled></td>
-                <td id="Y22" onclick="AddRand(2,2)"><input id ="X22" value="" disabled></td>
-                <td id="Y23" onclick="AddRand(2,3)"><input id ="X23" value="" disabled></td>
+                <td id="X10" onclick="inputMark(1,0)"></td>
+                <td id="X11" onclick="inputMark(1,1)"></td>
+                <td id="X12" onclick="inputMark(1,2)"></td>
             </tr>
             <tr>
-                <td id="Y31" onclick="AddRand(3,1)"><input id ="X31" value="" disabled></td>
-                <td id="Y32" onclick="AddRand(3,2)"><input id ="X32" value="" disabled></td>
-                <td id="Y33" onclick="AddRand(3,3)"><input id ="X33" value="" disabled></td>
+                <td id="X20" onclick="inputMark(2,0)"></td>
+                <td id="X21" onclick="inputMark(2,1)"></td>
+                <td id="X22" onclick="inputMark(2,2)"></td>
             </tr>
         </table>
-<input type="button" value="RESET" style="margin-left: 700px; center;font-size: 30px" onclick="Reset()">
-<p id="output" style="margin: auto;text-align: center;font-size: 50px"></p>
-
+<input type="button" value="RESET" style="font-size: 30px" onclick="ClearTable()">
+<p id="output" style="margin: auto;text-align: center;font-size: 50px;line-height: 80px"></p>
+</div>
 </body>
 </html>
