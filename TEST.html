@@ -5,30 +5,15 @@
     <title>Thay đổi chuỗi</title>
 </head>
 <body>
-<h1> Chess</h1>
-<table>
-    <tr>
-        <td>A</td>
-        <td>B</td>
-    </tr>
-</table>
 <script>
-
+    let arr = [1,2];
+    function swap(a,b) {
+        let temp = a;
+        a = b;
+        b = temp;
+    }
+    swap(arr[0],arr[1]);
+    alert(arr)
 </script>
 </body>
 </html>
-<style>
-    table{
-        border: 1px solid black;
-        margin: auto;
-    }
-    td{
-        border: 1px solid black;
-        width: 300px;
-        height: 50px;
-        font-size: 25px;
-    }
-    td:hover{
-        background-color: blue;
-    }
-</style>

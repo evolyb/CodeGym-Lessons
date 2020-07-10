@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Car Drive</title>
+</head>
+<body onload="doReady()">
+<canvas id="myCanvas" width="600px" height="600px" style="border:1px solid #d3d3d3;"></canvas>
+</body>
+</html>
+<script>
+    let canvas =document.getElementById("myCanvas")
+    let ctx = canvas.getContext("2d");
+    let image = new Image();
+    image.src = "image.png"
+    let x = 100;
+    let y = 100;
+    let timerId= setInterval(() => autoRun(), 300);
+    function drawImage(x,y) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(image,x,y,80,80);
+    }
+    function doReady(){
+        window.addEventListener('keydown',KeyPress);
+        drawImage(x,y);
+    }
+    function alertSomething() {
+        alert("Hello")
+    }
+    function autoRun() {
+        if (x<520) {
+            x = x + 20;
+        } else {
+            x = 0;
+        }
+        drawImage(x,y);
+
+    }
+    function KeyPress(evt){
+        if(evt.keyCode === 37){
+            clearInterval(timerId);
+        }
+        if(evt.keyCode === 39){
+            timerId= setInterval(() => autoRun(), 300);
+        }
+        // if(evt.keyCode === 38){
+        //     if (y>0) {
+        //         y = y - 20;
+        //     } else {
+        //         y = 520;
+        //     }
+        //     drawImage(x,y)
+        // }
+        // if(evt.keyCode === 40){
+        //     if (y<520) {
+        //         y = y + 20;
+        //     } else {
+        //         y = 0;
+        //     }
+        //     drawImage(x,y)
+        // }
+    }
+
+
+</script>

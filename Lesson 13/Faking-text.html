@@ -16,7 +16,9 @@
         let str_now = Screen.value;
         let len = str_now.length;
         if (len > str.length){
-            len = str.length;
+            // len = str.length;
+            Screen.value = "";
+            return;
         }
         let change_str = "";
         for (let i = 0; i <len ; i++) {

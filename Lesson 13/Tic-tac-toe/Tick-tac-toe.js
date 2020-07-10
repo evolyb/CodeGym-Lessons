@@ -10,9 +10,25 @@ let rPossibleWin = -1;
 let cPossibleWin = -1;
 let rPossibleLose = -1;
 let cPossibleLose = -1;
+let Score1 = 0;
+let Score2 = 0;
 
 function selectGameType() {
     gameType = document.getElementById("gameType").value;
+    if (gameType === "1"){
+        document.getElementById("Player1").innerText = "Player 01"
+        document.getElementById("Player2").innerText = "Super Computer 01"
+    } else {
+        document.getElementById("Player1").innerText = "Player 01"
+        document.getElementById("Player2").innerText = "Player 02"
+    }
+    Score1 = 0;
+    Score2 = 0;
+    updateScore();
+}
+function updateScore() {
+    document.getElementById("Score1").innerHTML = Score1;
+    document.getElementById("Score2").innerHTML = Score2;
 }
 
 function DisplayTable() {
@@ -34,7 +50,7 @@ function ClearTable() {
     DisplayTable();
 }
 function inputPlayer(r,c) {
-    if (checkInputAlready(r,c)) return;
+    // if (checkInputAlready(r,c)) return;
     if (isOver) return;
     let ID = 'X'+r+c;
     countStep++;
@@ -51,6 +67,10 @@ function inputPlayer(r,c) {
         document.getElementById("output").innerHTML = winPlayer + " is winner";
         changeColor();
         isOver = true;
+        if (winPlayer === "X"){
+            Score1++;
+        } else Score2++;
+        updateScore();
     }
 }
 function checkInputAlready(r,c) {
@@ -106,10 +126,13 @@ function changeColor() {
 }
 
 function inputMark(r,c) {
-    inputPlayer(r,c);
-    if (gameType !== "1") return;
-    if (countStep <=8){
-        computerMove();
+    if (!checkInputAlready(r,c))
+    {
+        inputPlayer(r,c);
+        if (gameType !== "1") return;
+        if (countStep <=8){
+            computerMove();
+        }
     }
 }
 
@@ -121,8 +144,8 @@ function computerMove() {
         rPossibleWin = 0;
         cPossibleWin = 2;
     } else {
-        checkPossibleWin();
         checkPossibleLose();
+        checkPossibleWin();
         if (rPossibleWin === -1 && rPossibleLose === -1){
             checkSpecial()
         }

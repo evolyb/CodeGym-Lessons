@@ -7,7 +7,7 @@
     <script src="Tick-tac-toe.js"></script>
 </head>
 <body onload="DisplayTable()">
-<div style="margin: auto;text-align: center">
+<div style="margin: auto;text-align: center;max-width: 500px; position: relative">
 <h1 style="margin: auto;text-align: center;font-size: 50px">TIC-TAC-TOE</h1>
     <select style="margin: 0px auto;align-items: center;font-size: 30px" id="gameType" onchange="selectGameType()">
         <option value="1">Player - Com</option>
@@ -33,5 +33,27 @@
 <input type="button" value="RESET" style="font-size: 30px" onclick="ClearTable()">
 <p id="output" style="margin: auto;text-align: center;font-size: 50px;line-height: 80px"></p>
 </div>
+<div id="score-board">
+    <p>Score Board</p>
+    <table>
+        <tr>
+            <td id ="Player1">
+                Player 01
+            </td>
+            <td id ="Player2">
+                Super Computer 01
+            </td>
+        </tr>
+        <tr>
+            <td id ="Score1">
+                0
+            </td>
+            <td id ="Score2">
+                0
+            </td>
+        </tr>
+    </table>
+</div>
+
 </body>
 </html>

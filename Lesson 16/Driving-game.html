@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Driving Game</title>
+</head>
+<body onkeydown="myCar.autoMove(event)">
+<h2>Driving Game</h2>
+<p id="boardInfo"></p>
+<canvas id="myCanvas" width="1000px" height="500px" style="border:1px solid #d3d3d3;"></canvas>
+</body>
+</html>
+<script>
+    let canvas =document.getElementById("myCanvas")
+    canvas.Width = canvas.scrollWidth;
+    canvas.Height = canvas.scrollHeight;
+    let ctx = canvas.getContext("2d");
+    const distantMove = 50;
+    let timerID;
+    function showBoardNow() {
+        document.getElementById("boardInfo").innerHTML = "Board: Speed = "+Math.round(10000/myCar.Speed)+" km/h"
+        +". Score: "+gameScore;
+    }
+    function drawImg(img,item) {
+        if (!img.complete){
+            setTimeout(function () {
+                drawImg(img,item)
+            },50)
+        }
+        ctx.drawImage(img,item.xPosition,item.yPosition,item.Width,item.Height);
+    }
+    function Cars(name) {
+        this.Name = name;
+        this.Width = 100;
+        this.Height = 50;
+        this.xPosition = 500;
+        this.yPosition = 250;
+        this.Direction = "right";
+        this.Speed = 500;
+        this.Image = './images/car.png'
+        this.selectDirection = function () {
+            switch (this.Direction) {
+                case "right":
+                    if (this.xPosition === canvas.width - this.Width){
+                        this.xPosition = 0;
+                        break;
+                    }
+                    this.xPosition += distantMove;
+                    break;
+                case "left":
+                    if (this.xPosition === 0){
+                        this.xPosition = canvas.width - this.Width;
+                        break;
+                    }
+                    this.xPosition -= distantMove;
+                    break;
+                case "up":
+                    if (this.yPosition === 0){
+                        this.yPosition = canvas.height - this.Height;
+                        break;
+                    }
+                    this.yPosition -= distantMove;
+                    break;
+                default:
+                    if (this.yPosition === canvas.height - this.Height){
+                        this.yPosition = 0;
+                        break;
+                    }
+                    this.yPosition += distantMove;
+            }
+        }
+        this.Show = function () {
+            image = new Image();
+            image.src = this.Image;
+            drawImg(image,this);
+        }
+        this.autoMove = function (event) {
+            switch (event.keyCode){
+                case 37:
+                    this.Direction = "left";
+                    break;
+                case 38:
+                    this.Direction = "up";
+                    break;
+                case 39:
+                    this.Direction = "right";
+                    break;
+                case 40:
+                    this.Direction = "down";
+                    break;
+                case 17:
+                    this.Speed = Math.round(this.Speed/2);
+                    showBoardNow();
+                    clearInterval(timerID);
+                    timerID = setInterval(() => myCar.Move(), myCar.Speed);
+                    break;
+                case 16:
+                    this.Speed = this.Speed*2;
+                    showBoardNow();
+                    clearInterval(timerID);
+                    timerID = setInterval(() => myCar.Move(), myCar.Speed);
+            }
+        }
+        this.Move = function () {
+            ctx.clearRect(this.xPosition,this.yPosition, this.Width, this.Height);
+            this.selectDirection();
+            for (let i = 0; i < obstacle.length ; i++) {
+                if (this.checkContact(obstacle[i])) {
+                    clearInterval(timerID);
+                    alert("Game Over! You hit the Obstacle")
+                    ctx.clearRect(0,0, canvas.Width, canvas.Height);
+                    this.Image = "./images/crush.png"
+                    this.xPosition = 0;
+                    this.yPosition = 0;
+                    this.Width = canvas.Width;
+                    this.Height = canvas.Height;
+                    break;
+                }
+            }
+            for (let i = 0; i < reward.length; i++) {
+                if (this.checkContact(reward[i])){
+                    gameScore++;
+                    reward.splice(i,1);
+                    showBoardNow();
+                }
+            }
+            if (gameScore === numOfReward){
+                clearInterval(timerID);
+                ctx.clearRect(0,0, canvas.Width, canvas.Height);
+                this.Image = "./images/win.png"
+                this.xPosition = 0;
+                this.yPosition = 0;
+                this.Width = canvas.Width;
+                this.Height = canvas.Height;
+            }
+            this.Show();
+
+        }
+        this.checkContact = function (rect) {
+            return !(this.xPosition > (rect.xPosition+ rect.Width) ||
+                (this.xPosition + this.Width) < rect.xPosition ||
+                this.yPosition > (rect.yPosition + rect.Height) ||
+                (this.yPosition + this.Height) < rect.yPosition);
+        }
+    }
+    function Obstacles (iD){
+        this.iD =iD;
+        this.Width = 45;
+        this.Height = 45;
+        this.xPosition = Math.floor(Math.random()*20)*50 + 1;
+        this.yPosition = Math.floor(Math.random()*10)*50 + 1;
+        this.Image = './images/obstacle.png'
+        this.Show = function () {
+            let image = new Image();
+            image.src = this.Image;
+            drawImg(image,this)
+        }
+
+    }
+    function Reward (iD){
+        this.iD = iD;
+        this.Width = 45;
+        this.Height = 45;
+        this.xPosition = 0;
+        this.yPosition = 0;
+        this.Image = './images/flower.png'
+        this.Show = function () {
+            let image = new Image();
+            image.src = this.Image;
+            drawImg(image,this)
+        }
+        this.generateLocation = function () {
+            let isExist;
+            do{
+                isExist = false;
+                x = Math.floor(Math.random()*20)*50 + 1;
+                y = Math.floor(Math.random()*10)*50 + 1;
+                for (let i = 0; i < obstacle.length ; i++) {
+                    if (obstacle[i].xPosition === x && obstacle[i].yPosition === y){
+                        isExist = true;
+                    }
+                }
+                for (let i = 0; i < reward.length -1 ; i++) {
+                    if (reward[i].xPosition === x && reward[i].yPosition === y){
+                        isExist = true;
+                    }
+                }
+            } while (isExist);
+            this.xPosition = x;
+            this.yPosition = y;
+        }
+    }
+
+    let gameScore = 0;
+    let myCar = new Cars("VinFast");
+    let obstacle = [];
+    let numOfObstacle = parseInt(prompt("Số lượng chướng ngại vật <5"));
+    for (let i = 0; i < numOfObstacle ; i++) {
+        obstacle[i] = new Obstacles(i);
+        obstacle[i].Show();
+    }
+    let reward = [];
+    let numOfReward = parseInt(prompt("Số lượng phần thưởng <5"));
+    for (let i = 0; i < numOfReward ; i++) {
+        reward[i] = new Reward(i);
+        reward[i].generateLocation();
+        reward[i].Show();
+    }
+
+    myCar.Show();
+    showBoardNow();
+    timerID= setInterval(() => myCar.Move(), myCar.Speed);
+
+</script>

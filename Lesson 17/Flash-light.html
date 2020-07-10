@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Flash Light</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+    function FlashLamp() {
+        this.status =false;
+        this.battery = new Battery(100);
+        this.setBattery = function (num) {
+            this.battery.setEnergy(num);
+        }
+        this.getBatteryInfo = function () {
+            alert(this.battery.getEnergy());
+        }
+        this.light = function () {
+            if (this.status) {
+                alert("Your FlashLight is ON")
+            } else if (this.battery.Energy >0){
+                alert("Your FlashLight is OFF");
+            } else {
+                alert("Please charge your Battery")
+            }
+        }
+        this.turnOn = function () {
+            if (this.battery.Energy > 0) {
+                this.status = true;
+                this.battery.decreaseEnergy();
+            }
+        }
+        this.turnOFF = function () {
+            this.status = false;
+        }
+    }
+    function Battery(Energy) {
+        this.Energy = Energy;
+        this.setEnergy = function (num) {
+            this.Energy = num;
+        }
+        this.getEnergy = function () {
+            return "Your Battery is "+this.Energy;
+        }
+        this.decreaseEnergy = function () {
+            if (this.Energy > 0){
+                this.Energy--;
+            }
+        }
+    }
+
+    let myFlashLamp = new FlashLamp();
+    myFlashLamp.getBatteryInfo()
+    myFlashLamp.turnOn();
+    myFlashLamp.light();
+    myFlashLamp.getBatteryInfo()
+    myFlashLamp.turnOFF();
+    myFlashLamp.light();
+</script>

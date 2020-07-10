@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rectangle Class</title>
+</head>
+<body>
+<canvas id="myCanvas" width="800px" height="500x" style="border:1px solid #d3d3d3;"></canvas>
+</body>
+</html>
+<script>
+    function Rectangle (longEdge,shortEdge){
+        this.longEdge = longEdge;
+        this.shortEdge = shortEdge;
+        this.setLongEdge = function(num){
+            this.longEdge = num;
+        }
+        this.setShortEdge = function(num){
+            this.shortEdge = num;
+        }
+        this.setEdge =function(num1,num2){
+            this.longEdge = num1;
+            this.shortEdge = num2;
+        }
+        this.Area =function(){
+            return this.longEdge * this.shortEdge;
+        }
+        this.ChuVi =function(){
+            return 2*(longEdge+shortEdge);
+        }
+        this.Draw = function (xStart,yStart) {
+            let ctx = document.getElementById("myCanvas").getContext('2d');
+            ctx.moveTo(xStart,yStart);
+            ctx.lineTo(longEdge+xStart,yStart);
+            ctx.lineTo(longEdge+xStart,shortEdge+yStart);
+            ctx.lineTo(xStart,shortEdge+yStart);
+            ctx.lineTo(xStart,yStart);
+            ctx.stroke();
+        }
+    }
+
+    let rectangle = new Rectangle(300,200);
+    rectangle.Draw(20,20);
+    alert("Diện tích = " + rectangle.Area())
+    alert("Chu vi = " + rectangle.ChuVi())
+
+</script>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Adam and Eva</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    function Apples() {
+        this.weight = 10;
+        this.decrease = function () {
+            if (!this.isEmpty())
+            this.weight--;
+        }
+        this.isEmpty = function () {
+            return this.weight === 0
+        }
+        this.getWeight = function () {
+            return this.weight;
+        }
+    }
+
+    function Human(name,gender) {
+        this.name = name;
+        this.gender = gender;
+        this.weight = 0;
+        this.isMale = function () {
+            return this.gender === 1;
+        }
+        this.setGender = function (num) {
+            this.gender = num;
+        }
+        this.checkApple = function (item) {
+            return !item.isEmpty()
+        }
+        this.eat = function (item) {
+            if (this.checkApple(item)){
+                this.weight++;
+                item.decrease();
+            } else {
+                alert("Apple is Empty");
+            }
+        }
+        this.saySomething = function (word) {
+            alert(word);
+        }
+        this.getName = function () {
+            return this.name;
+        }
+        this.setName = function (newName) {
+            this.name = newName;
+        }
+        this.getWeight = function () {
+            return this.weight;
+        }
+        this.setWeight = function (num) {
+            this.weight = num;
+        }
+    }
+
+    let myApple = new Apples();
+    let Adam = new Human("Adam",1);
+    let Eva = new Human("Eva", 0);
+    let count = 0;
+
+    while (!myApple.isEmpty()){
+        if (count % 2 === 0){
+            Adam.eat(myApple);
+        } else {
+            Eva.eat(myApple)
+        }
+        count++;
+    }
+    console.log(Adam.isMale());
+    console.log(Adam);
+    console.log(Eva);
+    console.log(myApple);
+</script>
