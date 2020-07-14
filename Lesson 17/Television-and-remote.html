@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Television and Remote</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    function Remote(iD,item) {
+        this.iD = iD;
+        this.televisionControling = item;
+        this.switchONOFF = function () {
+            this.televisionControling.isON = !this.televisionControling.isON;
+        }
+        this.selectChanel = function (chanel) {
+            if (!this.televisionControling.isON) return;
+            this.televisionControling.chanel = chanel;
+        }
+        this.changeVolume = function (num) {
+            if (!this.televisionControling.isON) return;
+            if (this.televisionControling.volume + num < 0){
+                this.televisionControling.volume  = 0;
+            } else if (this.televisionControling.volume + num > 100){
+                this.televisionControling.volume  = 100;
+            } else {
+                this.televisionControling.volume += num;
+            }
+        }
+    }
+    function Television(iD) {
+        this.iD = iD;
+        this.chanel = 7;
+        this.isON = false;
+        this.volume = 0;
+    }
+
+    let myTelevision = new Television(0);
+    let myRemote = new Remote(0,myTelevision);
+    myRemote.switchONOFF();
+    myRemote.changeVolume(2);
+    myRemote.selectChanel(3);
+    myRemote.switchONOFF();
+    console.log(myTelevision);
+
+</script>

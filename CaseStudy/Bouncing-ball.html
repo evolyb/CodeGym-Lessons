@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bouncing Ball</title>
+</head>
+<body>
+<canvas id="myCanvas" style="border: 2px solid black; " width="600" height="500" ></canvas>
+</body>
+</html>
+<script>
+    let canvas = document.getElementById("myCanvas")
+    let ctx = canvas.getContext("2d");
+    canvas.width = canvas.scrollWidth;
+    canvas.height = canvas.scrollHeight;
+
+    //Class Ball
+    function Balls() {
+        this.x = 300;
+        this.y = 450;
+        this.dx = 2;
+        this.dy =-2;
+        this.radius = 5;
+        this.show = function () {
+            ctx.arc(this.x, this.y, this.radius, 0, Math.PI*2, false);
+            ctx.fillStyle = "green";
+            ctx.fill();
+        }
+        this.move = function () {
+            this.x += this.dx;
+            this.y += this.dy;
+            this.show();
+        }
+        this.contactWithWall = function () {
+            if (this.x-this.radius <= 0){
+                this.dx = Math.abs(this.dx);
+            }
+            if (this.x + this.radius >= canvas.width) {
+                this.dx = -Math.abs(this.dx);
+            }
+            if (this.y-this.radius <= 0){
+                this.dy= Math.abs(this.dy);
+            }
+            if (this.y + this.radius >= canvas.height){
+                alert("Game Over");
+                clearInterval(timeID);
+            }
+        }
+        this.contactWithBar = function (item) {
+            let leftPoint = Math.sqrt((this.x-item.x)*(this.x-item.x)+(this.y-item.y)*(this.y-item.y))
+            let rightPoint = Math.sqrt((this.x-item.x-item.long)*(this.x-item.x-item.long)+(this.y-item.y)*(this.y-item.y));
+            if (leftPoint < this.radius || rightPoint<this.radius){
+                this.dy = -Math.abs(this.dy);
+                if (this.x -this.dx*item.long/2 <= item.x || this.x -this.dx*item.long/2 >item.x +item.long){
+                    this.dx = -this.dx
+                }
+                return;
+            }
+            if (this.x+this.dx >= item.x && this.x+this.dx <= item.x + item.long
+                && this.y + this.radius + this.dy >= item.y){
+                this.dy = -Math.abs(this.dy);
+            }
+        }
+        this.contactWithBrick = function (item) {
+            if ((this.x >=item.x && this.x <=item.x+item.long && this.y-this.radius<=item.y+item.thick && this.y-this.radius >=item.y)
+                || (this.x >=item.x && this.x <=item.x+item.long && this.y+this.radius>=item.y && this.y+this.radius <=item.y+item.thick)){
+                this.dy = -this.dy;
+            } else{
+                let ax;
+                let bx;
+                if (this.x <= item.x){
+                    ax = item.x
+                } else {
+                    ax = item.x + item.long
+                }
+                if (this.y <= item.y){
+                    bx = item.y
+                } else bx = item.y + item.thick;
+                if (((this.x-ax)*(this.x-ax)+(this.y-bx)*(this.y-bx))<=this.radius*this.radius){
+                    this.dx = - this.dx
+                } else return;
+            }
+            item.hide();
+            scoreBoard.updateScore();
+            rewards.selectReward(myBar);
+            showAddScore();
+        }
+    }
+
+    // Class of Bar
+    function Bars() {
+        this.thick = 15;
+        this.long = 100;
+        this.x = Math.round(canvas.width/2 - this.long/2);
+        this.y = Math.round(canvas.height - this.thick);
+        this.dx = 0;
+
+        this.show = function () {
+            ctx.rect(this.x,this.y,this.long,this.thick);
+            ctx.fillStyle = "green";
+            ctx.fill();
+        }
+        this.move = function () {
+            if (this.x + this.dx >=0 && this.x+this.long+this.dx <= canvas.width){
+                this.x += this.dx;
+            }
+            this.show()
+        }
+    }
+    //Class bricks
+    function Bricks() {
+        this.thick = brickThick;
+        this.long = brickLong;
+        this.x = 0;
+        this.y = 0;
+        this.isExist = true;
+        this.show = function () {
+            ctx.beginPath();
+            ctx.rect(this.x,this.y,this.long,this.thick);
+            ctx.fillStyle = "blue"
+            ctx.fill();
+            ctx.closePath();
+        }
+        this.hide = function () {
+            this.isExist = false;
+            this.x = 0;
+            this.y = 0;
+            this.long = 0;
+            this.thick = 0;
+        }
+
+    }
+    function Rewards() {
+        this.value = 0;
+        this.reduceBarLength = function (item) {
+            item.long = Math.round(item.long / 2);
+            rewardMessage = "The length of the bar is reduced by half";
+        }
+        this.increaseBarLength = function (item) {
+            if (item.long * 2 >= canvas.width){
+                item.long = canvas.width-100;
+                item.x = 0;
+            } else if (item.x+item.long*2 > canvas.width) {
+                item.long = item.long * 2;
+                item.x = canvas.width - item.long
+            }else {
+                item.long = item.long*2
+            }
+            rewardMessage = "The length of the bar is doubled"
+        }
+        this.increaseSpeed = function () {
+            if (speedTime - 2 > 0){
+                speedTime -= 2;
+            }
+            rewardMessage = "The speed is increased"
+            clearInterval(timeID);
+            timeID = setInterval(autoRun,speedTime);
+        }
+        this.increaseBall = function () {
+            myBall.radius += 20;
+            rewardMessage = "The Ball is bigger";
+        }
+        this.selectReward = function (item) {
+            this.value = Math.floor(Math.random()*4);
+            switch (this.value) {
+                case 0:
+                    this.increaseBarLength(item);
+                    break;
+                case 1:
+                    this.reduceBarLength(item);
+                    break;
+                case 2:
+                    this.increaseSpeed();
+                    break;
+                case 3:
+                    this.increaseBall();
+            }
+        }
+    }
+
+    function ScoreBoard() {
+        this.value = 0;
+        this.y =30;
+        this.show = function () {
+            ctx.beginPath();
+            ctx.moveTo(0,this.y);
+            ctx.lineTo(canvas.width,this.y)
+            ctx.stroke();
+            ctx.closePath();
+            ctx.font ="20px Arial";
+            ctx.fillText("Score: "+this.value,10,this.y-10,300);
+            ctx.closePath()
+
+        }
+        this.updateScore = function () {
+            this.value++;
+            if (this.value === brickColumn*brickRow){
+                alert("Congratulation!!!! You win");
+                clearInterval(timeID);
+                isOver = true;
+            }
+        }
+    }
+
+    function autoRun(){
+        if (isOver) return;
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        if (isContinue){
+            ctx.font = fontSize+"px Arial";
+            ctx.fillText("+"+continueCount,10,300,300);
+            ctx.fillText(rewardMessage,10,350,300);
+        }
+        scoreBoard.show();
+        myBall.contactWithWall();
+        myBar.move();
+        myBall.contactWithBar(myBar);
+        for (let i = 0; i < myBricks.length; i++) {
+            for (let j = 0; j < myBricks[i].length; j++) {
+                myBall.contactWithBrick(myBricks[i][j])
+            }
+        }
+        myBall.move()
+        for (let i = 0; i < myBricks.length; i++) {
+            for (let j = 0; j < myBricks[i].length; j++) {
+                if (myBricks[i][j].isExist){
+                    myBricks[i][j].show();
+                }
+            }
+        }
+    }
+    function moveBar(evt){
+        if (evt.keyCode === 37){
+            myBar.dx = -4;
+        }
+        if (evt.keyCode === 39){
+            myBar.dx = 4;
+        }
+    }
+    function stopMoveBar(){
+        myBar.dx = 0;
+    }
+    function showAddScore(){
+        isContinue = true;
+        continueCount++;
+        setTimeout(()=>{isContinue = false; continueCount=0; fontSize=20;},2000);
+    }
+
+    // Initial Set
+    window.addEventListener("keydown", moveBar)
+    window.addEventListener("keyup",stopMoveBar );
+    let isOver = false;
+    let speedTime = 10;
+    let isContinue = false;
+    let continueCount = 0;
+    let fontSize = 30;
+    let timeID = setInterval(autoRun,speedTime);
+    let rewards = new Rewards();
+    let rewardMessage = "";
+    let scoreBoard =new ScoreBoard();
+    let myBall = new Balls();
+    myBall.x = Math.random()*canvas.width;
+    let myBar = new Bars();
+    let brickLong = 50;
+    let brickThick = 20;
+    let brickPaddingLeft = 20;
+    let brickPaddingTop = 10;
+    let brickColumn = Math.floor(canvas.width/(brickLong+brickPaddingLeft))
+    let firstPadding = (canvas.width - (brickColumn*brickLong+(brickColumn-1)*brickPaddingLeft))/2
+    let brickRow = 3;
+    let myBricks = [];
+    for (let i = 0; i < brickRow; i++) {
+        myBricks[i] = []
+        for (let j = 0; j < brickColumn; j++) {
+            myBricks[i][j] = new Bricks();
+            myBricks[i][j].x = firstPadding + j * (brickLong+brickPaddingLeft);
+            myBricks[i][j].y = scoreBoard.y + 10 + i * (brickThick+brickPaddingTop);
+        }
+    }
+</script>

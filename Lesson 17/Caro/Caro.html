@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CARO</title>
+    <style>
+        table{
+            border-collapse: collapse;
+        }
+        td{
+            border: 2px solid black ;
+            width: 30px;
+            height: 30px;
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        td:hover{
+            background-color: #0ff30f;
+        }
+    </style>
+</head>
+<body onload="fillBoard()">
+<input type="button" value="resetGame" style="margin-bottom: 10px;font-size: 20px" onclick="initialSet()">
+    <div id="boardGame"></div>
+</body>
+</html>
+<script>
+    let isX = true;
+    let maxRow = 20;
+    let maxColumn = 20;
+    let cellLocation = [];
+    let comboCheck = [[0,-1],[-1,0],[-1,-1],[-1,1]]
+    let howWin =[];
+    let isWin = false;
+    let rStart;
+    let cStart;
+
+    //Set class CellGame for each cell on board;
+    function CellGame(r,c) {
+        this.value = "";
+        this.row = r;
+        this.column = c;
+        this.checkWin = function () {
+            for (let i = 0; i < comboCheck.length ; i++) {
+                rStart = this.row;
+                cStart = this.column;
+                while (rStart + comboCheck[i][0] >= 0 && cStart + comboCheck[i][1] >= 0
+                && rStart + comboCheck[i][0] <= maxRow-1 && cStart + comboCheck[i][1] <= maxColumn-1 ){
+                    if (cellLocation[rStart+comboCheck[i][0]][cStart+comboCheck[i][1]].value !== this.value) break;
+                    rStart += comboCheck[i][0]
+                    cStart += comboCheck[i][1]
+                }
+                for (let j = 0; j < 5; j++) {
+                    if ((rStart - j*comboCheck[i][0]) > (maxRow - 1) || (cStart - j*comboCheck[i][1]) > (maxColumn - 1)
+                        || (rStart - j*comboCheck[i][0]) <0 ||(cStart - j*comboCheck[i][1]) <0){
+                        break;
+                    }
+                    if (cellLocation[rStart-j*comboCheck[i][0]][cStart - j*comboCheck[i][1]].value !== this.value){
+                        break;
+                    }
+                    if (j===4){
+                        isWin = true;
+                        howWin = comboCheck[i];
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+    }
+    // Set first board onload
+    function fillBoard() {
+        let board = "<table id ='Caro' class='Caro'>";
+        for (let i = 0; i < maxRow; i++) {
+            board += "<tr>"
+            for (let j = 0; j < maxColumn ; j++) {
+                board += "<td id='X"+i+"Y"+j+"' onclick ='inputMark("+i+","+j+")'></td>"
+            }
+            board += "</tr>"
+        }
+        board += "</table>"
+        document.getElementById("boardGame").innerHTML = board;
+        initialSet();
+    }
+    // Creat array to store data of board
+    function initialSet() {
+        isX = true;
+        isWin = false;
+        for (let i = 0; i < maxRow ; i++) {
+            cellLocation[i] = [];
+            for (let j = 0; j < maxColumn ; j++) {
+                let iD = "X"+i+"Y"+j
+                cellLocation[i][j] = new CellGame(i,j);
+                document.getElementById(iD).innerHTML = "";
+                document.getElementById(iD).style.backgroundColor =defaultStatus;
+            }
+        }
+    }
+    // Input an X or an 0 on board and switch the current player
+    function inputMark(r,c) {
+        let iD = "X"+r+"Y"+c;
+        if (isOccupied(r,c)) return;
+        if (isWin) return;
+        if (isX){
+            document.getElementById(iD).innerHTML = cellLocation[r][c].value = "X";
+            isX = false;
+        } else {
+            document.getElementById(iD).innerHTML = cellLocation[r][c].value = "0";
+            isX = true;
+        }
+        if (cellLocation[r][c].checkWin()){
+            fillColor();
+            alert(cellLocation[r][c].value+" is winner of this game");
+        }
+    }
+    // Check cell to know if it is occupied
+    function isOccupied(r,c) {
+        return  cellLocation[r][c].value !== "";
+    }
+    // Set color for 5 cells win
+    function fillColor() {
+        for (let j = 0; j <5 ; j++) {
+            let ID = "X"+(rStart - j*howWin[0])+"Y"+(cStart - j*howWin[1])
+            document.getElementById(ID).style.backgroundColor = "blue";
+        }
+    }
+</script>
