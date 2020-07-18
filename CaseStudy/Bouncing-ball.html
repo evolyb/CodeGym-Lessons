@@ -5,14 +5,41 @@
     <title>Bouncing Ball</title>
 </head>
 <body>
-<canvas id="myCanvas" style="border: 2px solid black; " width="600" height="500" ></canvas>
+<img id="imgWin" src="win.png" width="1000" height="600" alt="Hello" hidden="true" onclick="reLoad()">
+<img id="imgLose" src="lose.png" width="1000" height="600" alt="Hello" hidden="true" onclick="reLoad()">
+<canvas id="myCanvas" style="border: 2px solid black; " width="1000" height="600" ></canvas>
 </body>
 </html>
 <script>
-    let canvas = document.getElementById("myCanvas")
-    let ctx = canvas.getContext("2d");
-    canvas.width = canvas.scrollWidth;
-    canvas.height = canvas.scrollHeight;
+    // Reload
+    function reLoad() {
+        window.location.reload();
+    }
+    //Class Effect;
+    let effectNow = new EffectBoom(0,0);
+    let listColor = ["red","blue","green","yellow","white"]
+    function EffectBoom(x,y) {
+        this.x = x;
+        this.y = y;
+        this.count = 16;
+        this.radius = 0;
+        this.show = function () {
+            if (this.count >15) return;
+            let colorNow = listColor[Math.floor(Math.random()*5)];
+            this.count++;
+            this.radius = 30*this.count;
+            ctx.beginPath();
+            ctx.arc(this.x,this.y,this.radius,0,2*Math.PI);
+            ctx.fillStyle = colorNow;
+            ctx.fill();
+            ctx.closePath()
+        }
+        this.getPosition = function (item) {
+            effectNow.x = item.centerX();
+            effectNow.y = item.centerY();
+            effectNow.count = 0;
+        }
+    }
 
     //Class Ball
     function Balls() {
@@ -22,9 +49,11 @@
         this.dy =-2;
         this.radius = 5;
         this.show = function () {
+            ctx.beginPath();
             ctx.arc(this.x, this.y, this.radius, 0, Math.PI*2, false);
             ctx.fillStyle = "green";
             ctx.fill();
+            ctx.closePath();
         }
         this.move = function () {
             this.x += this.dx;
@@ -42,7 +71,9 @@
                 this.dy= Math.abs(this.dy);
             }
             if (this.y + this.radius >= canvas.height){
-                alert("Game Over");
+                // alert("Game Over");
+                document.getElementById("imgLose").hidden = false;
+                canvas.hidden = true;
                 clearInterval(timeID);
             }
         }
@@ -80,6 +111,7 @@
                     this.dx = - this.dx
                 } else return;
             }
+            effectNow.getPosition(item);
             item.hide();
             scoreBoard.updateScore();
             rewards.selectReward(myBar);
@@ -90,15 +122,17 @@
     // Class of Bar
     function Bars() {
         this.thick = 15;
-        this.long = 100;
+        this.long = 200;
         this.x = Math.round(canvas.width/2 - this.long/2);
         this.y = Math.round(canvas.height - this.thick);
         this.dx = 0;
 
         this.show = function () {
+            ctx.beginPath()
             ctx.rect(this.x,this.y,this.long,this.thick);
             ctx.fillStyle = "green";
             ctx.fill();
+            ctx.closePath();
         }
         this.move = function () {
             if (this.x + this.dx >=0 && this.x+this.long+this.dx <= canvas.width){
@@ -113,6 +147,12 @@
         this.long = brickLong;
         this.x = 0;
         this.y = 0;
+        this.centerX = function () {
+            return this.x + this.long/2;
+        }
+        this.centerY = function () {
+            return this.y + this.thick / 2;
+        }
         this.isExist = true;
         this.show = function () {
             ctx.beginPath();
@@ -133,20 +173,24 @@
     function Rewards() {
         this.value = 0;
         this.reduceBarLength = function (item) {
-            item.long = Math.round(item.long / 2);
-            rewardMessage = "The length of the bar is reduced by half";
+            if (item.long - 40 <40){
+                item.long = 40;
+            } else {
+                item.long -= 40;
+            }
+            rewardMessage = "The length of the bar is reduced";
         }
         this.increaseBarLength = function (item) {
-            if (item.long * 2 >= canvas.width){
-                item.long = canvas.width-100;
+            if (item.long +40 >= canvas.width){
+                item.long = canvas.width-40;
                 item.x = 0;
-            } else if (item.x+item.long*2 > canvas.width) {
-                item.long = item.long * 2;
+            } else if (item.x+item.long+40 > canvas.width) {
+                item.long = item.long +40;
                 item.x = canvas.width - item.long
             }else {
-                item.long = item.long*2
+                item.long = item.long +40;
             }
-            rewardMessage = "The length of the bar is doubled"
+            rewardMessage = "The length of the bar is increased"
         }
         this.increaseSpeed = function () {
             if (speedTime - 2 > 0){
@@ -157,11 +201,15 @@
             timeID = setInterval(autoRun,speedTime);
         }
         this.increaseBall = function () {
-            myBall.radius += 20;
+            myBall.radius += 15;
             rewardMessage = "The Ball is bigger";
         }
+        this.increaseHelp = function () {
+            countHelp++;
+            rewardMessage = "Help time increased";
+        }
         this.selectReward = function (item) {
-            this.value = Math.floor(Math.random()*4);
+            this.value = Math.floor(Math.random()*5);
             switch (this.value) {
                 case 0:
                     this.increaseBarLength(item);
@@ -174,6 +222,9 @@
                     break;
                 case 3:
                     this.increaseBall();
+                    break;
+                case 4:
+                        this.increaseHelp();
             }
         }
     }
@@ -186,16 +237,23 @@
             ctx.moveTo(0,this.y);
             ctx.lineTo(canvas.width,this.y)
             ctx.stroke();
-            ctx.closePath();
             ctx.font ="20px Arial";
             ctx.fillText("Score: "+this.value,10,this.y-10,300);
+            ctx.fillText("Help Remain (Use keyUp to use): "+countHelp,200,this.y-10,300);
+            if (AIisOn){
+                ctx.fillText("You are using AI",700,this.y-10,300);
+            } else {
+                ctx.fillText("AI is OFF (Use keyDown to use)",600,this.y-10,300);
+            }
             ctx.closePath()
 
         }
         this.updateScore = function () {
             this.value++;
             if (this.value === brickColumn*brickRow){
-                alert("Congratulation!!!! You win");
+                // alert("Congratulation!!!! You win");
+                document.getElementById("imgWin").hidden = false;
+                canvas.hidden = true;
                 clearInterval(timeID);
                 isOver = true;
             }
@@ -211,8 +269,11 @@
             ctx.fillText(rewardMessage,10,350,300);
         }
         scoreBoard.show();
+        effectNow.show();
         myBall.contactWithWall();
         myBar.move();
+        AIPlay();
+        myBar.show();
         myBall.contactWithBar(myBar);
         for (let i = 0; i < myBricks.length; i++) {
             for (let j = 0; j < myBricks[i].length; j++) {
@@ -231,9 +292,17 @@
     function moveBar(evt){
         if (evt.keyCode === 37){
             myBar.dx = -4;
+            AIisOn = false;
         }
         if (evt.keyCode === 39){
             myBar.dx = 4;
+            AIisOn = false;
+        }
+        if (evt.keyCode === 38){
+            HelpMe();
+        }
+        if (evt.keyCode === 40){
+            AIisOn = true;
         }
     }
     function stopMoveBar(){
@@ -244,14 +313,49 @@
         continueCount++;
         setTimeout(()=>{isContinue = false; continueCount=0; fontSize=20;},2000);
     }
+    function HelpMe(){
+        if (countHelp > 0){
+            let iRand, jRand;
+            do {
+                iRand = Math.floor(Math.random()*myBricks.length);
+                jRand = Math.floor(Math.random()*myBricks[iRand].length);
+            } while (!myBricks[iRand][jRand].isExist)
+                effectNow.getPosition(myBricks[iRand][jRand]);
+                myBricks[iRand][jRand].hide();
+                scoreBoard.updateScore();
+                countHelp--;
+        }
+    }
+    let startTime = Date.now();
+    function AIPlay (){
+        if (AIisOn){
+                let now = Date.now();
+                let distantTime = now - startTime;
+                if (brickRow*brickColumn - scoreBoard.value < countHelp){
+                    if (distantTime > 1500){
+                        HelpMe();
+                        startTime = now;
+                    }
+                }
+                if (myBall.x > myBar.x + myBar.long/2){
+                    myBar.x = myBar.x +2;
+                } else {
+                    myBar.x = myBar.x -2;
+                }
+            }
+    }
 
     // Initial Set
+    let canvas = document.getElementById("myCanvas")
+    let ctx = canvas.getContext("2d");
     window.addEventListener("keydown", moveBar)
     window.addEventListener("keyup",stopMoveBar );
-    let isOver = false;
-    let speedTime = 10;
+    let AIisOn = false;
+    let isOver = false;                                 // Check if you win
+    let speedTime = 10;                                 // Speed of game;
     let isContinue = false;
     let continueCount = 0;
+    let countHelp = 3;
     let fontSize = 30;
     let timeID = setInterval(autoRun,speedTime);
     let rewards = new Rewards();
@@ -260,7 +364,7 @@
     let myBall = new Balls();
     myBall.x = Math.random()*canvas.width;
     let myBar = new Bars();
-    let brickLong = 50;
+    let brickLong = 30;
     let brickThick = 20;
     let brickPaddingLeft = 20;
     let brickPaddingTop = 10;
