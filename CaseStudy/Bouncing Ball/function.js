@@ -1,11 +1,22 @@
 
 function loadGame() {
     soundBegin = new Audio("sounds/begin.mp3");
-    drawBackground();
+    backgroundImg.src = "images/background"+backgroundID+".png";
+    ctx.beginPath();
+    backgroundImg.onload = function(){
+        ctx.beginPath();
+        ctx.drawImage(backgroundImg,0,0,canvas.width,canvas.height);
+        ctx.closePath();
+        ctx.font = "55px Arial";
+        ctx.fillStyle = "white";
+        ctx.fillText(startText,20,300);
+    }
+    ctx.closePath();
 }
 function startGame() {
     if (isOver) return;
     if (isStart) return;
+    startText = "";
     isStart = true;
     soundBegin.play();
     window.addEventListener("keydown",moveMyBar);
@@ -95,17 +106,15 @@ function drawBackground() {
     } else backgroundID =1;
     backgroundImg.src = "images/background"+backgroundID+".png";
     backgroundImg.onload = function(){
+        ctx.beginPath();
         ctx.drawImage(backgroundImg,0,0,canvas.width,canvas.height);
+        ctx.closePath();
     }
 }
 function GetScore() {
     this.value = 0;
     this.resetValue =1;
     this.show = function () {
-        // if (this.resetValue% 26 === 0){
-        //     drawBackground();
-        //     this.resetValue =1;
-        // }
         document.getElementById("score-board").innerHTML = this.value;
     }
 }
@@ -116,16 +125,16 @@ function Timer(time,effect) {
     this.effect = effect;
     this.update = function () {
         this.endTime = Date.now()
-        if (this.endTime - this.startTime > time) {
-            effect.reset();
+        if (this.endTime - this.startTime > this.time) {
+            this.effect.reset();
             return;
         }
-        effect.update();
+        this.effect.update();
     }
 }
-function EffectChangeColor(item,defaultColor){
+function EffectChangeColor(item){
     this.reset = function () {
-        item.color = defaultColor
+        item.color = item.defautColor;
     }
     this.update = function () {
         let color = Math.floor(Math.random()*colorLive.length);
