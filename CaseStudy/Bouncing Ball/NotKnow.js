@@ -23,7 +23,7 @@ function NotKnow(x,y) {
         if (this.x + this.radius > item.x && this.x - this.radius < item.x +item.length
             && this.y + this.radius > item.y && this.y - this.radius <item.y + item.height){
             this.isExist = false;
-            let selectCase = Math.floor(Math.random()*3);
+            let selectCase = Math.floor(Math.random()*4);
             switch (selectCase) {
                 case 0:
                     for (let i = 0; i < 3; i++) {

@@ -57,10 +57,10 @@ function creatBricks() {
 function moveMyBar(evt) {
     switch (evt.keyCode) {
         case 37:
-            myBar.dx = -myBar.speed;
+            myBar.dx = -myBar.speed*myBar.directMove;
             break;
         case 39:
-            myBar.dx = myBar.speed;
+            myBar.dx = myBar.speed*myBar.directMove;
             break;
     }
 }
@@ -102,10 +102,10 @@ function GetScore() {
     this.value = 0;
     this.resetValue =1;
     this.show = function () {
-        if (this.resetValue% 26 === 0){
-            drawBackground();
-            this.resetValue =1;
-        }
+        // if (this.resetValue% 26 === 0){
+        //     drawBackground();
+        //     this.resetValue =1;
+        // }
         document.getElementById("score-board").innerHTML = this.value;
     }
 }
