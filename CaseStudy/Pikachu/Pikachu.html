@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        table{
+            border: 1px solid black;
+            border-collapse: collapse;
+            background-color: green;
+            text-align: center;
+        }
+        td{
+            width: 40px;
+            height: 40px;
+            border: 1px solid black;
+            font-size: 25px;
+        }
+        td:hover{
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div id="gameBoard"></div>
+</body>
+</html>
+<script>
+    rowToPoint = function (x1,y1,x2,y2,end) {
+        if (x1 !== x2) return false;
+        if (y1 === y2 && x1 !== x2) return false;
+        if (y1 === y2 && x1 === x2) return true;
+        if (y1 > y2) {
+            for (let i = y1 -1; i >=y2 ; i--) {
+                if (i===y2 && end === true) continue;
+                if (arr[x1][i] !== 0) return false;
+            }
+            return true;
+        } else {
+            for (let i = y1 +1; i <=y2 ; i++) {
+                if (i===y2 && end === true) continue;
+                if (arr[x1][i] !== 0) return false;
+            }
+            return true;
+        }
+    }
+    columnToPoint = function (x1,y1,x2,y2,end) {
+        if (y1 !== y2) return false;
+        if (x1 === x2 && y1 !== y2) return false;
+        if (y1 === y2 && x1 === x2) return true;
+        if (x1 > x2) {
+            for (let i = x1 -1; i >=x2 ; i--) {
+                if (i===x2 && end === true) continue;
+                if (arr[i][y1] !== 0) return false;
+            }
+            return true;
+        } else {
+            for (let i = x1 +1; i <=x2 ; i++) {
+                if (i===x2 && end === true) continue;
+                if (arr[i][y1] !== 0) return false;
+            }
+            return true;
+        }
+    }
+    zRowToPoint = function (x1,y1,x2,y2) {
+        if (x1 === x2) return false;
+        for (let i = 0; i <arr[0].length; i++) {
+            if (!rowToPoint(x1,y1,x1,i,false)) continue;
+            let checkL = (i===y2);
+            if (!columnToPoint(x1,i,x2,i,checkL)) continue;
+            if (!rowToPoint(x2,i,x2,y2,true)) continue;
+            return true;
+        }
+        return false;
+    }
+    zColumnToPoint = function (x1,y1,x2,y2) {
+        if (y1 === y2) return false;
+        for (let i = 0; i <arr.length; i++) {
+            if (!columnToPoint(x1,y1,i,y1,false)) continue;
+            let checkL = (i===x2);
+            if (!rowToPoint(i,y1,i,y2,checkL)) continue;
+            if (!columnToPoint(i,y2,x2,y2,true)) continue;
+            return true;
+        }
+        return false;
+    }
+    function possibleMoveTo(x1,y1,x2,y2) {
+        if (rowToPoint(x1,y1,x2,y2,true)) return true;
+        if (columnToPoint(x1,y1,x2,y2,true)) return true;
+        if (zRowToPoint(x1,y1,x2,y2)) return true;
+        return zColumnToPoint(x1, y1, x2, y2);
+
+    }
+    function selectCell(x,y) {
+        if (arr[x][y] === 0) return;
+        let iD = "X"+x+"Y"+y;
+        switch (numberOfSelect) {
+            case 0:
+                document.getElementById(iD).style.backgroundColor = "red";
+                numberOfSelect++;
+                SelectValue[0] = arr[x][y];
+                firstIndexSelect[0] =x;
+                firstIndexSelect[1] = y;
+                firstIndexSelect[2] = "X"+x+"Y"+y;
+                break;
+            case 1:
+                if (firstIndexSelect[0] === x && firstIndexSelect[1] === y) return;
+                document.getElementById(iD).style.backgroundColor = "red";
+                numberOfSelect=0;
+                SelectValue[1] = arr[x][y];
+                secondIndexSelect[0] =x;
+                secondIndexSelect[1] = y;
+                secondIndexSelect[2] = "X"+x+"Y"+y;
+                if (SelectValue[0] === SelectValue[1] && possibleMoveTo(firstIndexSelect[0],firstIndexSelect[1],secondIndexSelect[0],secondIndexSelect[1])){
+                    document.getElementById(firstIndexSelect[2]).style.backgroundColor = "white";
+                    document.getElementById(secondIndexSelect[2]).style.backgroundColor = "white";
+                    arr[firstIndexSelect[0]][firstIndexSelect[1]] = 0;
+                    document.getElementById(firstIndexSelect[2]).innerHTML = "";
+                    arr[secondIndexSelect[0]][secondIndexSelect[1]] = 0;
+                    document.getElementById(secondIndexSelect[2]).innerHTML = "";
+                }
+                else {
+                    document.getElementById(firstIndexSelect[2]).style.backgroundColor = defaultStatus;
+                    document.getElementById(secondIndexSelect[2]).style.backgroundColor = defaultStatus;
+                }
+                break;
+
+        }
+
+
+    }
+    function drawTable() {
+        let data = "<table>"
+
+        for (let i = 0; i <rowNumber ; i++) {
+            data += "<tr>"
+            for (let j = 0; j <columnNumber ; j++) {
+                let iD = "X"+(i+1)+"Y"+(j+1);
+                data += "<td id = '"+iD+"' onclick='selectCell("+(i+1)+","+(j+1)+")'></td>"
+            }
+            data += "</tr>"
+        }
+        data += "</table>";
+        document.getElementById("gameBoard").innerHTML = data;
+    }
+    function initialSet(){
+        let count = [];
+        for (let i = 0; i <30 ; i++) {
+            count[i] = 0;
+        }
+        for (let i = 0; i <rowNumber+2 ; i++) {
+            arr[i] = [];
+            for (let j = 0; j <columnNumber+2 ; j++) {
+                if (i===0 || j ===0 || i ===rowNumber+1 || j === columnNumber+1){
+                    arr[i][j] = 0;
+                    count[arr[i][j]]++;
+                } else {
+                    do{
+                        arr[i][j] = Math.floor(Math.random()*25)+1;
+                    } while (count[arr[i][j]] > 3);
+                    count[arr[i][j]]++;
+                    let iD = "X"+i+"Y"+j
+                    document.getElementById(iD).innerHTML =arr[i][j];
+                }
+            }
+        }
+    }
+
+    let numberOfSelect = 0;
+    let SelectValue = [0,0];
+    let firstIndexSelect = [0,0,""];
+    let secondIndexSelect = [0,0,""];
+    let rowNumber = 10;
+    let columnNumber = 10;
+    let arr = [];
+    drawTable();
+    initialSet();
+
+</script>

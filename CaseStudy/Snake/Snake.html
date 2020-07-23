@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Snake</title>
+</head>
+<body>
+<canvas id="myCanvas" width="600" height="500" style="border: 1px solid black"></canvas>
+</body>
+</html>
+<script>
+    let canvas = document.getElementById("myCanvas");
+    let ctx = canvas.getContext("2d");
+    function Snake(iD,x,y) {
+        this.iD = iD
+        this.x = x;
+        this.y = y;
+        this.dx = 30;
+        this.dy = 0;
+        this.width = 30;
+        this.show =function () {
+            ctx.beginPath();
+            ctx.rect(this.x,this.y,this.width,this.width);
+            ctx.fillStyle = "blue";
+            ctx.stroke();
+            ctx.fill();
+            ctx.closePath();
+        }
+        this.selectDirection = function () {
+            if (this.iD === 0){
+                this.x = this.x + this.dx;
+                this.y = this.y + this.dy;
+            } else {
+                this.x = snake[this.iD - 1].x;
+                this.y = snake[this.iD - 1].y;
+            }
+        }
+    }
+    let snake =[];
+    snake[0] = new Snake(0,300,300);
+    snake[1] = new Snake(1,270,300)
+    snake[2] = new Snake(2,240,300)
+    snake[3] = new Snake(3,210,300)
+
+    function directSnake(evt) {
+        switch (evt.keyCode) {
+            case 37:
+                snake[0].dx = -30;
+                snake[0].dy = 0;
+                break;
+            case 38:
+                snake[0].dx = 0;
+                snake[0].dy = -30;
+                break;
+            case 39:
+                snake[0].dx = +30;
+                snake[0].dy = 0;
+                break;
+            case 40:
+                snake[0].dx = 0;
+                snake[0].dy = +30;
+                break;
+        }
+    }
+    function moveSnake(){
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        for (let i = snake.length-1; i >= 0 ; i--) {
+            snake[i].selectDirection();
+        }
+        for (let i = 0; i <snake.length ; i++) {
+            snake[i].show();
+        }
+    }
+    setInterval(moveSnake,100);
+    window.addEventListener("keydown", directSnake);
+
+
+</script>

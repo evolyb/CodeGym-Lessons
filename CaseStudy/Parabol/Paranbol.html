@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<canvas id ="myCanvas" style="border: 1px solid black"></canvas>
+</body>
+</html>
+<script>
+    let canvas = document.getElementById("myCanvas");
+    let ctx = canvas.getContext("2d");
+    canvas.width = 1000;
+    canvas.height = 600;
+    window.addEventListener("mousemove",determentAngle);
+    window.addEventListener("keypress",throwBullet);
+    let timeID = setInterval(updateScreen,30);
+    let pointerX, pointerY;
+
+
+    let bullet = new Bullet();
+    bullet.show();
+
+
+    function updateScreen() {
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        drawDirection(pointerX,pointerY);
+        if (bullet.isThrow){
+            bullet.setPosition();
+            bullet.move();
+        }
+        bullet.show();
+    }
+
+    function Bullet() {
+        this.radius = 4;
+        this.x = this.radius;
+        this.y = canvas.height-this.radius-1;
+        this.dx = 0;
+        this.dy = 0;
+        this.vX = 0;
+        this.vY = 0;
+        this.initialVy = 0;
+        this.isThrow = false;
+        this.show = function () {
+            ctx.beginPath();
+            ctx.arc(this.x,this.y,this.radius,0,2*Math.PI);
+            ctx.fill();
+            ctx.closePath();
+        }
+        this.move = function () {
+            this.x += this.dx;
+            this.y += this.dy;
+        }
+        this.setPosition = function () {
+            if (this.y >= canvas.height- this.radius){
+                this.y = canvas.height-this.radius-1;
+                this.vY = this.initialVy/2;
+                this.initialVy = this.initialVy/2;
+                if (Math.abs(this.vY) < 0.5){
+                    this.isThrow = false;
+                } else if (Math.abs(this.vX)>0.5 ) {
+                    this.vX = this.vX/2;
+                } else {
+                    this.vX = 0;
+                }
+            }
+            if (this.x + this.radius >= canvas.width ){
+                this.vX = -this.vX;
+                this.x = canvas.width - this.radius -1;
+            }
+            if (this.x - this.radius <= 0 ){
+                this.vX = -this.vX;
+                this.x = this.radius+1;
+            }
+            if (this.y - this.radius <=0){
+                this.y = this.radius+1;
+                this.vY = - this.vY;
+            }
+            this.dx = this.vX;
+            this.dy = this.vY;
+            this.vY = this.vY +1;
+        }
+        this.throw = function () {
+            let hypotenuse = Math.sqrt((pointerX - bullet.x)*(pointerX - bullet.x) + (pointerY - bullet.y)*(pointerY - bullet.y));
+            let cosX = (pointerX - bullet.x)/hypotenuse;
+            let sinX = (pointerY-bullet.y)/hypotenuse;
+            let v0 = prompt("Input v0");
+            this.vX = v0*cosX
+            this.vY = - v0*Math.abs(sinX);
+            this.initialVy = this.vY;
+        }
+    }
+    function determentAngle(evt) {
+        pointerX = evt.pageX -9;
+        pointerY = evt.pageY -9;
+    }
+    function throwBullet() {
+        bullet.throw();
+        bullet.isThrow = true;
+    }
+
+    function drawDirection(x,y) {
+        if (bullet.isThrow) return;
+        ctx.beginPath();
+        ctx.moveTo(bullet.x,bullet.y);
+        ctx.lineTo(x,y);
+        ctx.stroke();
+        ctx.closePath();
+    }
+</script>
